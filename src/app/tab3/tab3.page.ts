@@ -19,12 +19,12 @@ export class Tab3Page {
   Time: string = new Date().toLocaleTimeString();
   constructor(private storage: Storage,public api: RestApiService,public loadingController: LoadingController) {
 
-    this.category = "Dashbord"
-    this.Statement ="Paydebt"
+   // this.category = "Dashbord"
+   // this.Statement ="Paydebt"
 
    
      this.getSumAll();
-     this.getSumAllList();
+   //  this.getSumAllList();
   }
   
 
@@ -89,7 +89,7 @@ export class Tab3Page {
    
         res.onDidDismiss().then((dis) => {
          this.getSumAll();
-         this.getSumAllList();
+        // this.getSumAllList();
           this.DateToday = new Date().toLocaleDateString();
           this.Time = new Date().toLocaleTimeString();
         });
@@ -98,5 +98,27 @@ export class Tab3Page {
   
    
 }
+
+ionRefresh(event) {
+  console.log('Pull Event Triggered!');
+  setTimeout(() => {
+    console.log('Async operation has ended');
+
+    this.DateToday = new Date().toLocaleDateString();
+    this.Time = new Date().toLocaleTimeString();
+    this.getSumAllList();
+    //complete()  signify that the refreshing has completed and to close the refresher
+    event.target.complete();
+  }, 2000);
+}
+ionPull(event){
+//Emitted while the user is pulling down the content and exposing the refresher.
+console.log('ionPull Event Triggered!');
+}
+ionStart(event){
+//Emitted when the user begins to start pulling down.
+console.log('ionStart Event Triggered!');
+}
+
 
 }

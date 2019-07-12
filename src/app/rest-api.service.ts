@@ -15,6 +15,7 @@ const apiUrl = "http://mixproadvance.ddns.net/mbsmobile/mbsmobile.asmx/";
 export class RestApiService {
   public ReceiveUser:string="MdEsjk5d2P"
   public ReceivePassWord:string="Fs8SawmkSJ"
+  
   UUid :string="259979739d8442a0"
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
@@ -50,7 +51,46 @@ export class RestApiService {
        catchError(this.handleError));
    }
 
+ActiveRegister
+  GetCustomerName(CustomerCode: string): Observable<any> {
+   
+ 
+    const url = apiUrl+'GetCustomerName?ReceiveUser=' + this.ReceiveUser + '&ReceivePassWord='+ this.ReceivePassWord  +'&CustomerCode='+CustomerCode
+     return this.http.get(url).pipe(
+       map(this.extractData),
+       catchError(this.handleError));
+   }
 
+   GetRegister(CustomerCode: string): Observable<any> {
+   
+ 
+    const url = apiUrl+'GetRegister?ReceiveUser=' + this.ReceiveUser + '&ReceivePassWord='+ this.ReceivePassWord  +'&CustomerCode='+CustomerCode+'&RegisterNo='+ this.UUid 
+     return this.http.get(url).pipe(
+       map(this.extractData),
+       catchError(this.handleError));
+   }
+
+   AddRegister(CustomerCode: string,FirstName:string,LastName:string,Email:string,Mobile:string): Observable<any> {
+   
+ 
+    const url = apiUrl+'AddRegister?ReceiveUser=' + this.ReceiveUser + '&ReceivePassWord='+ this.ReceivePassWord  +'&CustomerCode='+CustomerCode+'&FirstName='+ FirstName +'&LastName='+ LastName +
+                   '&Email='+ Email + '&Mobile=' + Mobile +'&RegisterNo='+ this.UUid 
+     return this.http.get(url).pipe(
+       map(this.extractData),
+       catchError(this.handleError));
+   }
+   ActiveRegister1(CustomerCode: string,ReferenceCode:string,UserName:string,password:string): Observable<any> {
+   
+ 
+    const url = apiUrl+'ActiveRegister?ReceiveUser=' + this.ReceiveUser + '&ReceivePassWord='+ this.ReceivePassWord  +'&CustomerCode='+CustomerCode+'&ReferenceCode='+ ReferenceCode +'&UserName='+ UserName +
+                   '&password='+ password  +'&RegisterNo='+ this.UUid 
+     return this.http.get(url).pipe(
+       map(this.extractData),
+       catchError(this.handleError));
+   }
+
+
+   
    getLoginpin(pin: string): Observable<any> {
    
  

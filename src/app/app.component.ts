@@ -41,7 +41,9 @@ export class AppComponent {
 
   initializeApp() {
     this.platform.ready().then(() => {
-    this.router.navigateByUrl('loginpin');
+   // this.router.navigateByUrl('loginpin');
+    //  this.router.navigateByUrl('register');
+      this.router.navigateByUrl('addpin');
    //  this.router.navigateByUrl('confirm');
   //his.router.navigateByUrl('receipt');
    // this.router.navigateByUrl('/tabs/tab2');
