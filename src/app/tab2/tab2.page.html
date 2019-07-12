@@ -1,0 +1,162 @@
+<ion-header>
+  <ion-toolbar style="height: 100px" class="font1">
+    <ion-title >
+     <div>
+        <h6>บริษัท:  {{ VFName }}</h6> 
+
+        <h6>รหัสผู้ใช้งาน: {{ UserId }}</h6>
+     </div>
+ 
+ 
+
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="Bg" >
+
+
+    <ion-searchbar
+    [showCancelButton]="shouldShowCancel"
+    placeholder="ค้นหา"
+    (ionInput)="getItems($event)"
+    (ionCancel)="onCancel($event)"
+    (search)="onSearch($event)"
+    [(ngModel)]="Id">
+</ion-searchbar>
+<div text-center>
+    <ion-button style="font-size: 13px; color:red;"  size="small" shape="round" fill="outline" (click)="scanCode()">แสกน QR Code</ion-button>
+ <!-- <u style="font-size: 14px;-webkit-text-decoration-color: red; text-decoration-color: red;" (click)="scanCode()" ><label  style="color: dodgerblue"  >แสกน QR Code</label></u>  -->
+</div>
+
+
+<br>
+<h1 *ngIf="state" class="font1"  text-center > ไม่พบข้อมูลสมาชิก</h1>
+        <div *ngFor="let item of DataMamber" >
+            <ion-avatar  class="avtar">
+                <img src="../../assets/img/person1.png">
+                
+              </ion-avatar>
+        
+        
+        </div>
+
+
+         
+        
+        <form  #form="ngForm" (ngSubmit)="Register(form)" *ngFor="let item of DataMamber"   >
+            <div >
+         
+              <ion-grid >
+                      <ion-row>
+                        
+                        <ion-col >
+                            <ion-grid>
+                                <ion-row>
+                                  <ion-col text-right  style="color: black" class="font1" >
+                                    <label style="font-size: 15px"  >คำนำหน้า:</label>    <br>
+                                      <label style="font-size: 15px"  >ชื่อ-สกุล:</label>    <br>
+                                 
+                                      <label style="font-size: 15px" >บัตรปชช.:</label> <br>
+                                      <label style="font-size: 15px"  >รหัสสมาชิก: </label>
+                                  </ion-col>
+                                  <ion-col size="7" class="font1" >
+
+                                  
+                                    <label style="font-size: 15px"  >{{item.Title}}   </label>     <br>  
+                                      <label style="font-size: 15px" >{{item.FirstName}}  {{item.LastName}}  </label>     <br>
+                                     
+                                      <label  style="font-size: 15px">{{item.IDCard }}</label> <br>
+                                      <label  style="font-size: 15px" >{{item.PersonId}}</label>
+
+                                        <ion-input    name="Person" hidden value="{{personid}}"  [(ngModel)]="Opt" ngModel required ></ion-input>
+                                  </ion-col>
+                               
+                                </ion-row>
+                                </ion-grid>
+      
+      
+      
+                         
+                        </ion-col>
+                       
+                      </ion-row>
+                      </ion-grid>
+         
+      
+      
+      </div>
+      
+        </form>
+     
+      
+  
+
+<br><br>
+<div padding *ngFor="let item of DataMamber">
+
+    <ion-button   style="height: 50px;font-size: 19px"   color="primary"  class="font1"   expand="block"  (click)="openModel()">ชำระหนี้  </ion-button>
+
+  <!-- <button  (click)="openModel()" block  class="Bt font1" [disabled]="form.invalid"   >
+        <ion-ripple-effect></ion-ripple-effect>
+              <br>
+              <img src="../../assets/img/debt.png" width="70%"  height="100%" ><br>
+              <label style="color: chocolate" ><b>ชำระหนี้</b></label>
+         </button>--> 
+
+
+
+ <!---<ion-grid padding>
+    <ion-row>
+
+        <ion-col>
+
+        </ion-col>
+      <ion-col>
+
+
+    <button  (click)="openModel()" block  class="Bt font1" [disabled]="form.invalid"   >
+        <ion-ripple-effect></ion-ripple-effect>
+              <br>
+              <img src="../../assets/img/debt.png" width="70%"  height="70%" ><br>
+              <label style="color: chocolate" ><b>ชำระหนี้</b></label>
+         </button>
+
+   
+      </ion-col>
+      <ion-col>
+          
+        </ion-col>
+    <ion-col>
+          <button  block  class="Bt font1"  >
+              <ion-ripple-effect></ion-ripple-effect>
+              <br>
+              <img src="../../assets/img/deposit.png"  width="70%"  height="70%"><br>
+              <label style="color: green" ><b>ฝากเงิน</b></label>
+              
+          </button>
+      </ion-col>
+      <ion-col>
+          <button  block  class="Bt font1"  >
+              <ion-ripple-effect></ion-ripple-effect>
+            <br>
+              <img src="../assets/img/share.png" width="70%"  height="70%" ><br>
+              <label style="color: lightseagreen" ><b>หุ้น</b></label>
+              
+          </button>
+      </ion-col>
+     
+    
+    </ion-row>
+   
+</ion-grid>-->
+
+
+
+   
+</div>
+
+
+
+ 
+</ion-content>

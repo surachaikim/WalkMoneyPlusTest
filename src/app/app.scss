@@ -1,0 +1,38 @@
+// App Styles
+// ----------------------------------------------------------------------------
+// Put style rules here that you want to apply to the entire application. These 
+// styles are for the entire app and not just one component. Additionally, this 
+// file can hold Sass mixins, functions, and placeholder classes to be imported 
+// and used throughout the application.
+
+.buttoncss{
+    color:#e74c3c;
+   
+    }
+    
+    .alertcss{
+    color:#e74c3c;
+
+    }
+    .md,
+.ios,
+.wp {
+  .custom-alert-danger {
+    > div {
+      background: red; // if you don't use .md, .ios, .mp initially, you'd have to use !important here.
+      color: #fff;
+      margin-bottom: 10px;
+    }
+  }
+}
+
+ion-loading.transparent {
+  .loading-wrapper {
+    background: transparent;
+    box-shadow: none;
+
+    .spinner-crescent circle {
+      stroke-width: 15px;
+    }
+  }
+}

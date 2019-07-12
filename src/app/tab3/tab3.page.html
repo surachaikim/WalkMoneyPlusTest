@@ -1,0 +1,216 @@
+<ion-header>
+    <ion-toolbar color="primary">
+      <ion-title class="font1">
+     สรุปยอดรายวัน
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content class="Bg"  >
+
+
+   
+
+    
+      <ion-segment   [(ngModel)]="category" (ionChange)="segmentChanged($event)">
+          <ion-segment-button value="Dashbord">
+            <ion-label>Dashbord</ion-label>    
+          </ion-segment-button>
+  
+          <ion-segment-button value="Statement">
+            <ion-label>Statement</ion-label>    
+          </ion-segment-button>
+  
+        </ion-segment>
+  
+        <br>
+        <div [ngSwitch]="category">
+  
+  
+          <br>
+  
+          <div *ngSwitchCase="'Dashbord'" >
+
+            
+              <ion-card  class="Card font1">
+                  
+                
+                  <ion-card-content>
+                    <br>
+                   
+                   <p text-center>ยอดที่เก็บได้วันนี้</p><br>
+                   <h1 text-center >{{amount |currency:' '}}</h1><br>
+                   <h2 text-center>บาท</h2>
+                  
+                  </ion-card-content>
+                </ion-card>
+
+               
+                
+                <p style="font-size: 13px" text-center class="font1">ข้อมูล ณ  {{DateToday}} เวลา {{Time}} น.</p>
+                <div text-center>
+                    <ion-icon   style="font-size: 13px" (click)="refresh()" name="refresh"></ion-icon>
+                </div>
+               
+  
+                <div padding class="font1">
+                
+                    <ion-grid>
+                        <ion-row>
+                          <ion-col size="1">
+  
+                          </ion-col>
+                          <ion-col size="3">
+
+                              <h4>รับชำระ </h4>
+                   <!--         <h6>เงินฝาก  </h6>
+                              <h6>เงินหุ้น  </h6>-->  
+                          </ion-col>
+                
+                          <ion-col size="5">
+                           <h4 text-right>{{amount |currency:' '}}</h4>
+                        <!--  <h5 text-right>4,000.00</h5>
+                           <h5 text-right>1,000.50</h5>--> 
+                          </ion-col>
+                
+                          <ion-col>
+                              <h4>บาท</h4>
+                            <!--  <h5>บาท</h5>
+                              <h5>บาท</h5>--> 
+                          </ion-col>
+                       
+                
+                        </ion-row>
+                    </ion-grid>
+                
+                
+                  
+                </div>
+  
+          </div>
+         
+        
+            <ion-list *ngSwitchCase="'Statement'"  >
+                <ion-item >
+                    <ion-thumbnail slot="start">
+                        <img src="assets/img/company.png" width="80px" height="100px">
+              
+                      </ion-thumbnail>
+                 
+                    <ion-label >
+                     <h3 class="font1">บริษัท : {{VFName}}</h3>
+                     <h4 class="font1">รหัสผู้ใช้งาน : {{UserId}}</h4>
+                     <h4 class="font1">ยอดเงินทั้งหมด  {{amount |currency:' '}}   บาท</h4>
+                     <p class="font1" text-right  style="font-size: 11px">ข้อมูล ณ {{DateToday}}  เวลา {{Time}} น.</p>
+                   
+                    </ion-label>
+                 
+                    
+  
+                  </ion-item>
+                  
+                 <!--<p style="font-size: 14px">Statement</p>--> 
+              
+  
+                  <ion-segment class="font1"   [(ngModel)]="Statement" (ionChange)="segmentChanged($event)" >
+                      <ion-segment-button value="Paydebt"  >
+                        <ion-label>รายการชำระ</ion-label>    
+                      </ion-segment-button>
+              
+                   <!--  <ion-segment-button value="Deposit">
+                        <ion-label>รายการฝาก</ion-label>    
+                      </ion-segment-button>
+  
+                      <ion-segment-button value="Share">
+                          <ion-label>ราการหุ้น</ion-label>    
+                        </ion-segment-button>--> 
+  
+  
+                      </ion-segment>
+  
+                      <div [ngSwitch]="Statement" >
+  
+                        <div *ngSwitchCase="'Paydebt'"  >
+                           <div padding class="font1" style="font-size:12px">
+                              
+                            
+                              <ion-grid  >
+
+                                  <ion-row>
+                                      <ion-col text-center>
+                                       <b style="font-size:14px" >วันที่</b> 
+                                      </ion-col>
+                                      <ion-col size="5" text-center>
+                                       <b style="font-size:14px">ชื่อ-นามสกุล</b> 
+                                      </ion-col>
+                                      <ion-col text-center>
+                                       <b style="font-size:14px">จำนวนเงิน/บาท</b>  
+                                      </ion-col>
+                                    </ion-row>
+
+
+                                  <ion-item *ngFor="let item of SumAmountList">
+                                      <ion-label>
+                                  <ion-row  >
+                                    <ion-col class="font1"> 
+                                      {{item.MovementDate | date: 'dd/MM/yyyy'}}
+                                    </ion-col>
+                                    <ion-col size="5" class="font1">
+                                      {{item.AccountName}}
+                                    </ion-col>
+                                    <ion-col text-right class="font1">
+                                      {{item.Amount |currency:' '}}
+                                    </ion-col>
+                                  </ion-row>
+                                </ion-label>
+                              </ion-item>
+                                  </ion-grid>
+                            
+                              </div>
+                
+                        </div>
+  
+  
+          <!--         <div *ngSwitchCase="'Deposit'" >
+                           
+  
+                            <div padding class="font1">
+                            
+                        B
+                              
+                            </div>
+              
+                      </div>
+  
+  
+  
+                      <div *ngSwitchCase="'Share'" >
+                           
+  
+                          <div padding class="font1">
+                          
+                      
+                            C
+                          </div>
+            
+                    </div>-->     
+  
+  
+  
+  
+                      </div>
+  
+
+  
+            </ion-list>
+  
+  
+  
+  
+          </div>
+  
+  
+  
+  
+  </ion-content>
+  
