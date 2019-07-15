@@ -7,7 +7,7 @@ const routes: Routes = [
   { path: 'register', loadChildren: './register/register.module#RegisterPageModule' },
   { path: 'paydebt', loadChildren: './paydebt/paydebt.module#PaydebtPageModule' },
   { path: 'confirm', loadChildren: './confirm/confirm.module#ConfirmPageModule' },
-  { path: 'receipt', loadChildren: './receipt/receipt.module#ReceiptPageModule' },
+  { path: 'receipt/:data1', loadChildren: './receipt/receipt.module#ReceiptPageModule' },
   { path: 'modal', loadChildren: './modal/modal.module#ModalPageModule' },
   { path: 'tab4', loadChildren: './tab4/tab4.module#Tab4PageModule' },
   { path: 'about', loadChildren: './about/about.module#AboutPageModule' },

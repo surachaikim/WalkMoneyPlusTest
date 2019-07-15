@@ -1,5 +1,5 @@
 .card{
-    width: 80% !important;
+    width: 85% !important;
     height: 170px !important;
      margin: 0 !important;
      background:#f3b42d;
@@ -10,3 +10,8 @@
      color: #292929;
  
 }
+
+.Bg{
+    --background: url(../../assets/img/BG002.jpg) 0 0/100% 100% no-repeat;
+   
+   }

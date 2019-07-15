@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
+import { Platform } from '@ionic/angular';
+import { SplashScreen } from '@ionic-native/splash-screen/ngx';
+import { StatusBar } from '@ionic-native/status-bar/ngx';
 @Component({
   selector: 'app-tab4',
   templateUrl: './tab4.page.html',
@@ -9,7 +12,10 @@ import { AlertController } from '@ionic/angular';
 })
 export class Tab4Page implements OnInit {
 
-  constructor(public alertController: AlertController,private storage: Storage,private router: Router) { }
+  constructor(public alertController: AlertController,private storage: Storage,private router: Router,
+    private platform: Platform,
+    private statusBar: StatusBar,
+    private splashScreen: SplashScreen) { }
 
   ngOnInit() {
   }
@@ -31,11 +37,20 @@ async  logout(){
             text: 'ตกลง',
             handler: () => {
               console.log('Confirm Okay');
-                
-    this.storage.clear().then(() => {
-      this.router.navigateByUrl('loginpin');
-     });
+              this.storage.remove('USER_INFO').then(() => {
+                this.platform.ready().then(() => {
 
+                  this.router.navigate(['loginpin']);
+                       this.statusBar.styleDefault();
+                       this.splashScreen.hide();
+                     });
+                  
+                   
+              });
+
+
+          
+                 
             },
           
           }
@@ -47,6 +62,7 @@ async  logout(){
 
 
 about(){
+  
   this.router.navigate(['about']);
 }
 

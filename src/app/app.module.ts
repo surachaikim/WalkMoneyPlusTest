@@ -11,6 +11,7 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HTTP } from '@ionic-native/http/ngx';
 import { PaydebtPageModule } from './paydebt/paydebt.module'
+import { ModalPageModule } from './modal/modal.module'
 import { ReceiptPageModule } from './receipt/receipt.module'
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { FormsModule } from '@angular/forms';
@@ -19,6 +20,7 @@ import { Base64 } from '@ionic-native/base64/ngx';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 import { Device } from '@ionic-native/device/ngx';
 import { Toast } from '@ionic-native/toast/ngx';
+import { Keyboard } from '@ionic-native/keyboard/ngx';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [
@@ -27,6 +29,7 @@ import { Toast } from '@ionic-native/toast/ngx';
   imports: [BrowserModule,
     PaydebtPageModule,
     ReceiptPageModule,
+    ModalPageModule,
      IonicModule.forRoot(),
       AppRoutingModule,
       FormsModule,
@@ -41,6 +44,7 @@ import { Toast } from '@ionic-native/toast/ngx';
     HTTP,
     Toast,
     Device,
+    Keyboard,
     Base64,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],

@@ -8,7 +8,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="font1" color="light" >
+<ion-content class="font1 Bg"  >
 
 <div padding>
 
@@ -23,7 +23,7 @@
 
 
 
-<h3 text-center  >{{name}}</h3>
+
 
 <br>
 
@@ -32,36 +32,20 @@
 
 
 <ion-slides pager="true"  >
-  <ion-slide  *ngFor="let item of DataLoan ; let i = index" (click)='presentAlertPrompt(item.AccountNo,item.TypeLoanName)'   >
+  <ion-slide  *ngFor="let item of DataLoan ; let i = index" (click)='presentAlertPrompt(item.AccountNo,item.MinPayment)'   >
    
-    
-
       <ion-card  class="card" >
-      
-        
+             
           <ion-card-content class="font1">
-            
-
-                  <ion-grid>
-                      <ion-row>
-                        <ion-col size="5">
-                            <h4 text-left  style="font-size: 15px" >ประเภทสัญญา: </h4>
-                  <h4  text-left  style="font-size: 15px">เลขที่สัญญา: </h4>
-                  <h4 text-left  style="font-size: 15px">ค่าปรับ:  </h4>
-                  <h4  text-left  style="font-size: 15px">ค่าติดตาม:  </h4>
-                  <h4 text-left  style="font-size: 15px">ยอดที่ต้องชำระ: </h4>
-                        </ion-col>
-                        <ion-col>
-                            <h4 text-left style="font-size: 15px" >{{item.TypeLoanName}} </h4>
-                            <h4  text-left  style="font-size: 15px">{{item.AccountNo}}</h4>
-                            <h4 text-left  style="font-size: 15px">0.00</h4>
-                            <h4  text-left  style="font-size: 15px">0.00</h4>
-                            <h4 text-left  style="font-size: 15px">{{item.MinPayment|currency:' '}}</h4>
-                        </ion-col>
-                       
-                      </ion-row>
-                    
-     </ion-grid>
+              <h4  text-left  style="font-size: 20px">เลขที่สัญญา :&nbsp;{{item.AccountNo}} </h4><br>
+              <div text-left>
+                  &nbsp;   <label style="font-size: 15px"><b>ชื่อ-สกุล:</b>&nbsp;{{item.PersonName}}  </label><br>
+                  &nbsp;   <label style="font-size: 15px"><b> ประเภท:</b>&nbsp;{{item.TypeLoanName}}  </label><br>
+                  &nbsp;   <label style="font-size: 15px"><b>  ยอดกู้:</b>&nbsp; {{item.TotalAmount|currency:' '}} </label><br>
+                  
+              </div>
+             
+                
             
           </ion-card-content>
         </ion-card>
@@ -76,7 +60,7 @@
 
 
 
-<br>
+<br><br>
 
 
 <ion-input readonly="{{isReadonly}}" style="font-size:22px;color: rgb(33, 95, 8)" class="font1" placeholder="รับเงินเพื่อ ชำระหนี้" text-center  value="{{Payresult|currency:' '}}" ></ion-input>
@@ -85,8 +69,8 @@
 <p style="font-size: 12px" text-center>ระบบจะส่งหลักฐานทาง SMS</p>
 
 
-<div padding>
-    <ion-button   style="height: 50px;font-size: 19px"   color="primary" expand="block"  (click)="savepaydebt()"   >บันทึก</ion-button>
+<div padding *ngIf="showbt">
+    <ion-button   style="height: 50px;font-size: 19px"   color="primary" expand="block"  (click)="openModelPay()"   >บันทึก</ion-button>
   
   </div>
 

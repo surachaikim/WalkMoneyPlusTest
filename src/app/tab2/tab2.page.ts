@@ -17,6 +17,8 @@ import {  ViewChildren, QueryList } from '@angular/core';
 import { Toast } from '@ionic-native/toast/ngx';
 //import { read } from 'fs';
 import {Router} from '@angular/router';
+import { Keyboard } from '@ionic-native/keyboard/ngx';
+
 @Component({
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',
@@ -46,18 +48,19 @@ export class Tab2Page {
   Uuid:string="1234567890";
   VFName:string="";
   UserId:string="";
+  CustomerCode:string="";
   title:string="";
   chkPerson:string="";
   public ReceiveUser:string="MdEsjk5d2P"
   public ReceivePassWord:string="Fs8SawmkSJ"
   UUid :string="1234567890"
   state:boolean =false
- 
+  SearchLoanAccountRes:any;
   barcodeScannerOptions: BarcodeScannerOptions;
 
   @ViewChild(IonRouterOutlet) routerOutlet: IonRouterOutlet;
   
-  constructor(private router: Router, private platform: Platform,private device: Device,private storage: Storage,public alertController: AlertController,private barcodeScanner: BarcodeScanner,private modalController:ModalController, private nav : NavController,public api: RestApiService,private http: HttpClient, private nativeHttp: HTTP, private plt: Platform,  public loadingController: LoadingController) {
+  constructor(private keyboard: Keyboard,private router: Router, private platform: Platform,private device: Device,private storage: Storage,public alertController: AlertController,private barcodeScanner: BarcodeScanner,private modalController:ModalController, private nav : NavController,public api: RestApiService,private http: HttpClient, private nativeHttp: HTTP, private plt: Platform,  public loadingController: LoadingController) {
 
  //   this.statusBar.overlaysWebView(true);
 
@@ -76,6 +79,7 @@ export class Tab2Page {
         this.storage.get('USER_INFO').then((val) => {
           this.UserId = val.UserId // ดึงข้อมูลผู้ใช้งาน
            this.VFName =val.CompName
+           this.CustomerCode =val.CustomerCode
           });
 
 
@@ -111,7 +115,8 @@ export class Tab2Page {
         this.scannedData = barcodeData.text;
            this.Id =this.scannedData
            if (this.scannedData != null){
-            this.getMemberData();
+           // this.getAccountLoan();
+          this.SearchLoanAccount()
           } else{
            this.presentAlert();
           }
@@ -124,50 +129,43 @@ export class Tab2Page {
       });
   }
  
-  async getMemberData() {
-    let loading = await this.loadingController.create({
-      cssClass: 'transparent',  // css ใส่ไว้ที่ app.scss
-      spinner: 'circles',
-    });
-    await loading.present();
- 
-    this.api.getMemberById(this.Id)
-     
- 
-    .subscribe(res => {
-     
-      this.DataMamber = res;
-     this.chkPerson=  res.PersonId
-      for (let i of this.DataMamber){
-        if (i.PersonId != ""){
-          this.personid = i.PersonId
-          this.state =false
-      
-          if(i.FirstName != "" && i.LastName != ""){
-            this.firstname = i.FirstName
-            this.lastname =i.LastName
+
+
+
+  SearchLoanAccount(){
+
+    this.storage.get('CUSTOMERCODE').then((val) => {
+console.log(val)
+      this.api.SearchLoanAccount(val,this.Id)
+      .subscribe(res => {
+        this.SearchLoanAccountRes = res
+       for (let i of this.SearchLoanAccountRes){
+          if(i.AccountNo === ""){
+            this.state =true
+            return;
           }
-          loading.dismiss()
-          console.log(this.DataMamber)
-          return;
-        }
-      
+          this.state =false
+       }
 
-       
-      }
-     
-      this.DataMamber =[];
-      this.state =true
+
+
+        console.log(res);
+      }, err => {
+        console.log(err);
+       // alert(err)
+      });
   
-      loading.dismiss()
-     
-    }, err => {
-      console.log('JS Call error: ', err);
-      loading.dismiss()
-      alert("ไม่พบสมาชิก")
+      });
 
-    });
+     
+        
   }
+
+
+
+
+
+
  
 async openModel(){
   if(this.personid == ""){
@@ -192,46 +190,29 @@ else{
 }
 
 
- /* checkregister(){
 
-    
-    this.api.checkregister(this.Uuid)
-    .subscribe(res => {
-      this.CompanyInfo =res
-  for (let itm of this.CompanyInfo){
-      if (itm.VFName != ""){
-        this.VFName =itm.VFName
-      }
-      if(itm.VFNo != ""){
-        this.VFNo =itm.VFNo
-      }
-  }
-     
-  
-      console.log(this.CompanyInfo);
-     
-
-
-    }, err => {
-      console.log(err);
-      
-    });
-
-
-  }
-
-  */
 
 
  onSearch(event){
  
-this.getMemberData()
 
+this.SearchLoanAccount();
 
-
+this.keyboard.hide();
   }
   
- 
+ async getAccountLoan(PersonId,PersonName){
+
+    const modal = await this.modalController.create({
+      component:PaydebtPage,
+      componentProps:{
+        data: PersonId,
+        data1: PersonName
+      }
+    });
+    modal.present();
+
+  }
 
  
 }

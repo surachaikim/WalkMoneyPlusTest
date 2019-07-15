@@ -6,6 +6,7 @@
 
         <h6>รหัสผู้ใช้งาน: {{ UserId }}</h6>
      </div>
+
  
  
 
@@ -13,25 +14,58 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="Bg" >
+<ion-content  >
 
 
-    <ion-searchbar
-    [showCancelButton]="shouldShowCancel"
-    placeholder="ค้นหา"
-    (ionInput)="getItems($event)"
-    (ionCancel)="onCancel($event)"
-    (search)="onSearch($event)"
-    [(ngModel)]="Id">
-</ion-searchbar>
-<div text-center>
-    <ion-button style="font-size: 13px; color:red;"  size="small" shape="round" fill="outline" (click)="scanCode()">แสกน QR Code</ion-button>
- <!-- <u style="font-size: 14px;-webkit-text-decoration-color: red; text-decoration-color: red;" (click)="scanCode()" ><label  style="color: dodgerblue"  >แสกน QR Code</label></u>  -->
-</div>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="10">
+      <!-- <ion-searchbar
+        [showCancelButton]="shouldShowCancel"
+        placeholder="ค้นหา"
+        (ionInput)="getItems($event)"
+        (ionCancel)="onCancel($event)"
+        (search)="onSearch($event)"
+        [(ngModel)]="Id">
+    </ion-searchbar>-->
+    <ion-searchbar showCancelButton="always" placeholder="ค้นหา"  (search)="onSearch($event)"></ion-searchbar>
+      </ion-col>
+      <ion-col>
+          <img src="assets\img\QR.png" width="55px" height="55px"  (click)="scanCode()">
+            
+   
+        <!--  <ion-button style="font-size: 13px; color:red;"  size="small" shape="round" fill="outline" (click)="scanCode()">แสกน QR Code</ion-button>-->
+       <!-- <u style="font-size: 14px;-webkit-text-decoration-color: red; text-decoration-color: red;" (click)="scanCode()" ><label  style="color: dodgerblue"  >แสกน QR Code</label></u>  -->
+     
+      </ion-col>
+ 
+    </ion-row>
+</ion-grid> 
+  
+
 
 
 <br>
 <h1 *ngIf="state" class="font1"  text-center > ไม่พบข้อมูลสมาชิก</h1>
+
+<ion-list>
+    <ion-item *ngFor="let item of SearchLoanAccountRes" (click)='getAccountLoan(item.PersonId,item.PersonName)'>
+        <ion-ripple-effect></ion-ripple-effect>
+        <ion-thumbnail slot="start">
+          <img src="../../assets/img/person1.png">
+        </ion-thumbnail>
+        <ion-label >
+         <h2 style="font-size:18px">{{item.PersonName}}   </h2> 
+         <p>{{item.IDCard}}   </p> 
+         <p>{{item.PersonId}}   </p> 
+        </ion-label>
+        
+      </ion-item>
+    
+  </ion-list>
+
+
+<!--<h1 *ngIf="state" class="font1"  text-center > ไม่พบข้อมูลสมาชิก</h1>
         <div *ngFor="let item of DataMamber" >
             <ion-avatar  class="avtar">
                 <img src="../../assets/img/person1.png">
@@ -95,7 +129,7 @@
 <br><br>
 <div padding *ngFor="let item of DataMamber">
 
-    <ion-button   style="height: 50px;font-size: 19px"   color="primary"  class="font1"   expand="block"  (click)="openModel()">ชำระหนี้  </ion-button>
+    <ion-button   style="height: 50px;font-size: 19px"   color="primary"  class="font1"   expand="block"  (click)="openModel()">ชำระหนี้  </ion-button>-->
 
   <!-- <button  (click)="openModel()" block  class="Bt font1" [disabled]="form.invalid"   >
         <ion-ripple-effect></ion-ripple-effect>
@@ -149,12 +183,12 @@
     
     </ion-row>
    
-</ion-grid>-->
+</ion-grid>
 
 
 
    
-</div>
+</div>-->
 
 
 

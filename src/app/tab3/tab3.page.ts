@@ -15,6 +15,7 @@ export class Tab3Page {
   SumAmount :any;
   SumAmountList :any;
   amount:string="00";
+  countacc:string="";
   DateToday: string = new Date().toLocaleDateString();
   Time: string = new Date().toLocaleTimeString();
   constructor(private storage: Storage,public api: RestApiService,public loadingController: LoadingController) {
@@ -22,7 +23,10 @@ export class Tab3Page {
    // this.category = "Dashbord"
    // this.Statement ="Paydebt"
 
-   
+   this.storage.get('USER_INFO').then((val) => {
+    this.UserId = val.UserId // ดึงข้อมูลผู้ใช้งาน
+     this.VFName =val.CompName
+    });
      this.getSumAll();
    //  this.getSumAllList();
   }
@@ -30,17 +34,19 @@ export class Tab3Page {
 
   
    getSumAll() {
-    this.storage.get('USER_INFO').then((val) => {
-      this.UserId = val.UserId // ดึงข้อมูลผู้ใช้งาน
-       this.VFName = val.CompName
+    this.storage.get('CUSTOMERCODE').then((val) => {
+   
 
-       this.api.getSumAll(val.UserId )
+       this.api.getSumAll(val)
        .subscribe(res => {   
          this.SumAmount = res;   
          for (let i of this.SumAmount){
-           if (i.Amount != ""){
-             this.amount = i.Amount
-           }    
+           if (i.TotalAmount != ""){
+             this.amount = i.TotalAmount
+           }  
+           if (i.CountAcc != ""){
+            this.countacc = i.CountAcc
+          }    
          }
         
          
@@ -56,10 +62,9 @@ export class Tab3Page {
    
   }
 
-  getSumAllList() {
-    this.storage.get('USER_INFO').then((val) => {
-      this.UserId = val.UserId // ดึงข้อมูลผู้ใช้งาน
-       this.VFName = val.CompName
+ /* getSumAllList() {
+    this.storage.get('CUSTOMERCODE').then((val) => {
+     
 
        this.api.getSumAllList(val.UserId )
        .subscribe(res => {   
@@ -77,28 +82,8 @@ export class Tab3Page {
       });
    
   }
-
-  refresh() {
+*/
  
-      this.loadingController.create({
-        cssClass: 'transparent',  // css ใส่ไว้ที่ app.scss
-        spinner: 'circles',
-        duration: 2000
-      }).then((res) => {
-        res.present();
-   
-        res.onDidDismiss().then((dis) => {
-         this.getSumAll();
-        // this.getSumAllList();
-          this.DateToday = new Date().toLocaleDateString();
-          this.Time = new Date().toLocaleTimeString();
-        });
-      });
-    
-  
-   
-}
-
 ionRefresh(event) {
   console.log('Pull Event Triggered!');
   setTimeout(() => {
@@ -106,7 +91,7 @@ ionRefresh(event) {
 
     this.DateToday = new Date().toLocaleDateString();
     this.Time = new Date().toLocaleTimeString();
-    this.getSumAllList();
+    this.getSumAll();
     //complete()  signify that the refreshing has completed and to close the refresher
     event.target.complete();
   }, 2000);
@@ -119,6 +104,10 @@ ionStart(event){
 //Emitted when the user begins to start pulling down.
 console.log('ionStart Event Triggered!');
 }
+   
+
+
+
 
 
 }

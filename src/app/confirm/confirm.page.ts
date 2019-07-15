@@ -41,7 +41,7 @@ RegisterAt:any;
               console.log(res);
             }, err => {
               console.log(err);
-              alert(err)
+              alert("รหัสยืนยัน ชื่อผู้ใช้งาน หรือ รหัสผู้ใช้งาน ไม่ถูกต้อง")
             });
         
             });

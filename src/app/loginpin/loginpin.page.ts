@@ -17,11 +17,11 @@ export class LoginpinPage implements OnInit {
   pin:string= "";
   Uuid:string ="1234567890"
   authState = new BehaviorSubject(false);
-  public CompanyInfo:any;
+  public CustomerName:any;
   public Pincheck: any;
   CompName:string="";
   CompId:string="";
-  
+  CustomerCode:string="";
   @Output() change: EventEmitter<string> = new EventEmitter<string>();
   constructor(private statusBar: StatusBar, private storage: Storage,public http: HttpClient,private router: Router,public api: RestApiService, public loadingController: LoadingController) {
     this.statusBar.backgroundColorByHexString('#084880');
@@ -34,31 +34,11 @@ export class LoginpinPage implements OnInit {
 
   ionViewWillEnter(){
     this.pin="";
-    this.checkregister();
+   // this.checkregister();
 }
 
 
-checkregister(){  
-  this.api.checkregister(this.Uuid)
-  .subscribe(res => {
-    this.CompanyInfo =res
 
-    for(let i of this.CompanyInfo){
-      if(i.VFName !=""){
-        this.CompName = i.VFName
-      }
-      if(i.VFNo !=""){
-        this.CompId =i.VFNo 
-      }
-    }
-  
-  
-    console.log(res);
-  }, err => {
-    console.log(err);    
-  });
-
-}
 
   async getLogin() {
     const loading = await this.loadingController.create({
@@ -66,32 +46,46 @@ checkregister(){
       spinner: 'circles'
     });
     
-    await loading.present();
-    await this.api.getLoginpin(this.pin)
+    loading.present();
+    this.storage.get('CUSTOMERCODE').then((val) => {
+    
+     this.api.GetLoginpin(val,this.pin)
       .subscribe(res => {
         this.Pincheck = res
-        console.log(res);
-       
+       // console.log(res);
+      
+for (let i of this.Pincheck){
 
+  
+  if (i.PassCode == this.pin && i.FlagActive == true){
 
+    this.api.GetCustomerName(val)
+      .subscribe(res => {
+        this.CustomerName = res
 
-  if (this.Pincheck.PassCode === this.pin){
-    this.router.navigateByUrl('/tabs/tab2')
-    var UserInfo ={
-      UserId: this.Pincheck.UserId,
-      UserName :this.Pincheck.UserName,
-   CompName: this.CompName,
-  CompId: this.CompId
-    }
-    this.storage.set('USER_INFO',UserInfo).then((val) =>{
-    //  this.authState.next(true);
-console.log(val)
+        for (let itm of this.CustomerName){
+          if(itm.CustomerName != ""){
+            this.CompName = itm.CustomerName
+            this.CustomerCode =itm.CustomerCode
+          }
+        }
+        var UserInfo ={
+          // set ค่าข้อมูลผู้เข้าใช้      
+          UserId: i.UserId,        
+          CompName: this.CompName,
+          CustomerCode: this.CustomerCode 
+        }
 
-    },
-       (err) =>{
-        console.log(err)
-
+        this.storage.set('USER_INFO',UserInfo).then((val) =>{
+        // เก็บลงเครื่อง
+          this.router.navigateByUrl('/tabs/tab2')
+        console.log(val)
+    
+    
+          });
       });
+
+
 
   }
   else{
@@ -99,6 +93,9 @@ console.log(val)
     alert("รหัสผิด" )
     this.pin=""
    }
+
+}
+ 
         loading.dismiss();
       }, err => {
         console.log(err);
@@ -107,7 +104,7 @@ console.log(val)
         this.pin=""
       });
 
-   
+    });
   }
 
   emitEvent() {

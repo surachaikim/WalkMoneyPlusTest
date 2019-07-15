@@ -43,16 +43,14 @@
 
   <div (scroll)="scrollPosition"  class="font1" style="font-size:12px">
              
-                 
+        <h6 text-center> วันที่ชำระ : {{DateToday}}       </h6>  
     <ion-list>
      
         <ion-grid  >
 
           <ion-row>
-              <ion-col text-center>
-               <b style="font-size:14px" >วันที่</b> 
-              </ion-col>
-              <ion-col size="5" text-center>
+         
+              <ion-col size="7" text-center>
                <b style="font-size:14px">ชื่อ-นามสกุล</b> 
               </ion-col>
               <ion-col text-center>
@@ -64,11 +62,10 @@
           <ion-item *ngFor="let item of SumAmountList">
               <ion-label>
           <ion-row  >
-            <ion-col class="font1"> 
-              {{item.MovementDate | date: 'dd/MM/yyyy'}}
-            </ion-col>
+      
             <ion-col size="4" class="font1">
-              {{item.AccountName}}
+              {{item.PersonName}}
+              <p>{{item.AccountNo}}</p>
             </ion-col>
             <ion-col text-right class="font1">
               {{item.Amount |currency:' '}}

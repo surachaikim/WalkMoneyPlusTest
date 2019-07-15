@@ -14,7 +14,7 @@ import { Toast } from '@ionic-native/toast/ngx';
 export class AppComponent {
   lastTimeBackPress = 0;
   timePeriodToExit = 2000;
-
+  RegisterCheck:any;
   @ViewChildren(IonRouterOutlet) routerOutlets: QueryList<IonRouterOutlet>;
   Uuid :string ="1234567890"
   Checkregister:any
@@ -35,18 +35,18 @@ export class AppComponent {
 
     
     this.initializeApp();
-  // this.Check();
-   this.backButtonEvent();
+    //this.GetRegister();
+    this.backButtonEvent();
   }
 
   initializeApp() {
     this.platform.ready().then(() => {
-   // this.router.navigateByUrl('loginpin');
-    //  this.router.navigateByUrl('register');
-      this.router.navigateByUrl('addpin');
+ //this.router.navigateByUrl('loginpin');
+   //this.router.navigateByUrl('register');
+     // this.router.navigateByUrl('addpin');
    //  this.router.navigateByUrl('confirm');
   //his.router.navigateByUrl('receipt');
-   // this.router.navigateByUrl('/tabs/tab2');
+  this.router.navigateByUrl('/tabs/tab2');
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
@@ -128,49 +128,29 @@ export class AppComponent {
     });
 }
 
+GetRegister(){
 
-
-
-
-  Check(){
-    this.api.checkregister(this.Uuid)
-    .subscribe(res => {
-      this.Checkregister =res
-
-
-
-  for (let itm of this.Checkregister){
-    
-      if(itm.VFNo == ""){
-     this.router.navigateByUrl('register');
-      }
-      /*else{
-        var  CompanyInfo = {
-          NameComp : itm.VFName,
-          IdComp :itm.VFNo
-        };
-        this.storage.set('COMPANY_INFO',CompanyInfo).then((val) =>{
-         
+  this.storage.get('CUSTOMERCODE').then((val) => {
     console.log(val)
-    
-        },
-           (err) =>{
-            console.log(err)
-    
-          });
-      }*/
-  }
-     
-  
+    this.api.GetRegister(val)
+    .subscribe(res => {
+      this.RegisterCheck = res
+     for (let i of this.RegisterCheck){
+        if(i.St === "0"){
+          this.router.navigateByUrl('register')
+        }
+
+     }
+
       console.log(res);
-     
-
-
     }, err => {
       console.log(err);
-      
+      alert(err)
     });
 
+    });
+
+   
       
-  }
+}
 }

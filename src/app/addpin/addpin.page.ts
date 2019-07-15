@@ -3,6 +3,9 @@ import {  Input, Output, EventEmitter } from "@angular/core";
 import { Router } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
+import { Storage } from '@ionic/storage';
+
+import { RestApiService } from '../rest-api.service';
 @Component({
   selector: 'app-addpin',
   templateUrl: './addpin.page.html',
@@ -10,8 +13,9 @@ import { AlertController } from '@ionic/angular';
 })
 export class AddpinPage implements OnInit {
   pin:string= "";
+  AddPassCodeRes:any;
   @Output() change: EventEmitter<string> = new EventEmitter<string>();
-  constructor(public alertController: AlertController,public loadingController: LoadingController) { }
+  constructor(private router: Router,public api: RestApiService,private storage: Storage,public alertController: AlertController,public loadingController: LoadingController) { }
 
   ngOnInit() {
   }
@@ -62,7 +66,7 @@ export class AddpinPage implements OnInit {
           }, {
             text: 'ตกลง',
             handler: () => {
-
+            this.AddPassCode()
 
               console.log('Confirm Okay');
             }
@@ -73,5 +77,31 @@ export class AddpinPage implements OnInit {
       await alert.present();
     }
   
-  
+    AddPassCode(){
+    
+      this.storage.get('CUSTOMERCODE').then((val) => {
+        console.log(val)
+              this.api.AddPassCode(val,this.pin)
+              .subscribe(res => {
+                this.AddPassCodeRes = res
+               for (let i of this.AddPassCodeRes){
+                  if(i.St != "0"){
+                    this.router.navigateByUrl('loginpin')
+                  }
+        
+               }
+        
+        
+        
+                console.log(res);
+              }, err => {
+                console.log(err);
+                alert(err)
+              });
+          
+              });
+        
+    }
+
+
 }

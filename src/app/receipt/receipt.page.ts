@@ -5,6 +5,8 @@ import { Screenshot } from '@ionic-native/screenshot/ngx';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 import { NavParams } from '@ionic/angular';
 import { NavController,ModalController,PopoverController} from '@ionic/angular'
+import { ActivatedRoute } from '@angular/router'
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-receipt',
   templateUrl: './receipt.page.html',
@@ -20,19 +22,28 @@ export class ReceiptPage implements OnInit {
   Payresult =null;
   VFName=null;
   Acc=null;
-  constructor(private modalController:ModalController,private navParams:NavParams,private socialSharing: SocialSharing,private storage: Storage,private base64:Base64, private screenshot: Screenshot) { 
+  LoanInterest =null;
+  TrackFee=null;
+  Mulct=null;
+  DocNo=null;
+  constructor(private router: Router,private activatedRoute :ActivatedRoute,private modalController:ModalController,private navParams:NavParams,private socialSharing: SocialSharing,private storage: Storage,private base64:Base64, private screenshot: Screenshot) { 
 
    
   }
 
   ionViewWillEnter(){
-    this.Payresult =this.navParams.get('data')
-    this.name =this.navParams.get('data1')
-     this.VFName =this.navParams.get('data2')
-      this.Acc =this.navParams.get('data3')
- 
+   this.Payresult =this.navParams.get('data')
+  this.name =this.navParams.get('data1')
+   this.VFName =this.navParams.get('data2')
+    this.Acc =this.navParams.get('data3')
+    this.Mulct =this.navParams.get('data4')
+    this.TrackFee =this.navParams.get('data5')
+    this.LoanInterest =this.navParams.get('data6')
+    this.DocNo =this.navParams.get('data7')
+
+
       this.screenShot();
- 
+  
       
   }
 
@@ -70,7 +81,9 @@ reset() {
   }, 1000);
 }
 closeModel(){
-  this.modalController.dismiss()
+  this.router.navigate(['tabs/tab2'])
+  //this.modalController.dismiss()
+
   this.reset();
   }
   

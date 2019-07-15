@@ -25,23 +25,3 @@ ion-tab-button{
 --background: var(--ion-color-light);
 }
 
-.buttoncss{
-    color:#e74c3c;
-   
-    }
-    
-    .alertcss{
-    color:#e74c3c;
-
-    }
-    .md,
-.ios,
-.wp {
-  .custom-alert-danger {
-    > div {
-      background: red; // if you don't use .md, .ios, .mp initially, you'd have to use !important here.
-      color: #fff;
-      margin-bottom: 10px;
-    }
-  }
-}

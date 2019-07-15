@@ -9,6 +9,7 @@ import { LoadingController } from '@ionic/angular';
 })
 export class Tab5Page implements OnInit {
   SumAmountList :any;
+  SumAmount :any;
   amount:string="00";
   VFName:string="";
   UserId:string="";
@@ -17,14 +18,21 @@ export class Tab5Page implements OnInit {
   constructor(private storage: Storage,public api: RestApiService,public loadingController: LoadingController) { }
 
   ngOnInit() {
-    this.getSumAllList();
-  }
-  getSumAllList() {
+
     this.storage.get('USER_INFO').then((val) => {
       this.UserId = val.UserId // ดึงข้อมูลผู้ใช้งาน
-       this.VFName = val.CompName
+       this.VFName =val.CompName
+      });
+    this.getSumAllList();
+    this.getSumAll();
 
-       this.api.getSumAllList(val.UserId )
+
+  }
+  getSumAllList() {
+    this.storage.get('CUSTOMERCODE').then((val) => {
+ 
+
+       this.api.getSumAllList(val)
        .subscribe(res => {   
          this.SumAmountList = res;   
        
@@ -40,6 +48,38 @@ export class Tab5Page implements OnInit {
       });
    
   }
+
+  getSumAll() {
+    this.storage.get('CUSTOMERCODE').then((val) => {
+   
+
+       this.api.getSumAll(val)
+       .subscribe(res => {   
+         this.SumAmount = res;   
+         for (let i of this.SumAmount){
+           if (i.TotalAmount != ""){
+             this.amount = i.TotalAmount
+           }  
+      
+         }
+        
+         
+         console.log(this.SumAmount)
+        
+       }, err => {
+         console.log('JS Call error: ', err);
+      
+         
+   
+       });
+      });
+   
+  }
+
+
+
+
+
   ionRefresh(event) {
     console.log('Pull Event Triggered!');
     setTimeout(() => {
