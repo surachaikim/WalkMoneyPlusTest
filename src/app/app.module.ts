@@ -21,6 +21,7 @@ import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 import { Device } from '@ionic-native/device/ngx';
 import { Toast } from '@ionic-native/toast/ngx';
 import { Keyboard } from '@ionic-native/keyboard/ngx';
+import { File } from '@ionic-native/file/ngx';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [
@@ -42,7 +43,7 @@ import { Keyboard } from '@ionic-native/keyboard/ngx';
     BarcodeScanner,
     SocialSharing,
     HTTP,
-    Toast,
+    Toast,File,
     Device,
     Keyboard,
     Base64,

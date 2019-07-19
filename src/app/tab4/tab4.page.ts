@@ -5,6 +5,7 @@ import { AlertController } from '@ionic/angular';
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import {OnDestroy, AfterViewInit } from '@angular/core'
 @Component({
   selector: 'app-tab4',
   templateUrl: './tab4.page.html',
@@ -38,12 +39,11 @@ async  logout(){
             handler: () => {
               console.log('Confirm Okay');
               this.storage.remove('USER_INFO').then(() => {
-                this.platform.ready().then(() => {
-
-                  this.router.navigate(['loginpin']);
-                       this.statusBar.styleDefault();
-                       this.splashScreen.hide();
-                     });
+            
+               // this.router.navigateByUrl('loginpin');
+            
+                  navigator['app'].exitApp();
+              
                   
                    
               });

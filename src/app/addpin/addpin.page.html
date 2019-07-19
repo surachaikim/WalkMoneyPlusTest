@@ -9,7 +9,8 @@
         <img src="assets\img\logo-wm+.png" width="60px" height="60px">
     </div>
   
-    <h5 text-center margin-vertical style="color: white;font-weight: 500"  ><B>กำหนดพิน 6 หลัก</B></h5>
+    <h5 text-center margin-vertical style="color: white;font-weight: 500"  *ngIf="pinshow" ><B style="color: rgb(230, 36, 61)">กำหนดพิน 6 หลัก</B></h5>
+    <h5 text-center margin-vertical style="color: white;font-weight: 500"  *ngIf="pinconfirm" ><B style="color: rgb(14, 172, 14)">ยืนยันพิน 6 หลัก</B></h5>
     <div text-center large margin-vertical style="color: white">
        <ion-icon [name]="pin.length>0 ? 'radio-button-on' : 'radio-button-off'"></ion-icon>&nbsp;
       <ion-icon [name]="pin.length>1 ? 'radio-button-on' : 'radio-button-off'"></ion-icon>&nbsp;
@@ -28,7 +29,7 @@
         <ion-row  >
           <ion-col >
         
-            <ion-button style="color: white"  shape="round" fill="outline" class="round-button" (click)="handleInput('1')">1</ion-button>
+            <ion-button style="color: white"   shape="round" fill="outline" class="round-button" (click)="handleInput('1')">1</ion-button>
             
           </ion-col>
           <ion-col>

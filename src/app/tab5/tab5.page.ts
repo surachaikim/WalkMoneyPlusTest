@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RestApiService } from '../rest-api.service';
 import { Storage } from '@ionic/storage';
 import { LoadingController } from '@ionic/angular';
+
 @Component({
   selector: 'app-tab5',
   templateUrl: './tab5.page.html',
@@ -42,7 +43,7 @@ export class Tab5Page implements OnInit {
        }, err => {
          console.log('JS Call error: ', err);
       
-         alert("ไม่สามารถเชื่อต่อ Server")
+       //  alert("ไม่สามารถเชื่อต่อ Server")
    
        });
       });

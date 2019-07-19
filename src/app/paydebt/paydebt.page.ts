@@ -152,7 +152,10 @@ this.AlertCF(AccountNo,MinPayment)
 
 }
 
-
+SaveLoan(){
+  this.openModelPay();
+  this.closeModel();
+}
 
 async openModelPay(){
 
@@ -174,6 +177,7 @@ async openModelPay(){
   });
   this.showbt=false
   modal.present();
+  
 }
 
 

@@ -36,4 +36,14 @@ ion-loading.transparent {
   font-family: 'Kanit', sans-serif;
   
 }
+.iontoast{
 
+  .toast-container{
+    background:rgb(36, 97, 8);
+  }
+  
+  .toast-md .toast-message{
+    color: rgb(253, 251, 251);
+  }
+
+}

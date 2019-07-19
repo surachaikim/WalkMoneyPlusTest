@@ -31,7 +31,7 @@ RegisterAt:any;
               this.RegisterAt = res
              for (let i of this.RegisterAt){
                 if(i.St != "0"){
-                  this.router.navigateByUrl('addpin')
+                  this.router.navigate(['addpin'])
                 }
       
              }

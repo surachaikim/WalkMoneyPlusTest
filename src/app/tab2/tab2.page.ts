@@ -18,6 +18,7 @@ import { Toast } from '@ionic-native/toast/ngx';
 //import { read } from 'fs';
 import {Router} from '@angular/router';
 import { Keyboard } from '@ionic-native/keyboard/ngx';
+import { OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 
 @Component({
   selector: 'app-tab2',
@@ -25,7 +26,8 @@ import { Keyboard } from '@ionic-native/keyboard/ngx';
   styleUrls: ['tab2.page.scss']
   
 })
-export class Tab2Page {
+export class Tab2Page implements  OnDestroy, AfterViewInit {
+  backButtonSubscription; 
 
 
 
@@ -200,6 +202,14 @@ this.SearchLoanAccount();
 
 this.keyboard.hide();
   }
+
+
+  onCancel(event){
+ 
+
+      }
+
+
   
  async getAccountLoan(PersonId,PersonName){
 
@@ -215,4 +225,13 @@ this.keyboard.hide();
   }
 
  
+  ngAfterViewInit() {
+    this.backButtonSubscription = this.platform.backButton.subscribe(() => {
+      navigator['app'].exitApp();
+    });
+  }
+ 
+  ngOnDestroy() {
+    this.backButtonSubscription.unsubscribe();
+  }
 }

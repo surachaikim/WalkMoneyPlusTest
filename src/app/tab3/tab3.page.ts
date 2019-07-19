@@ -55,7 +55,7 @@ export class Tab3Page {
        }, err => {
          console.log('JS Call error: ', err);
       
-         alert("ไม่สามารถเชื่อต่อ Server")
+      //   alert("ไม่สามารถเชื่อต่อ Server")
    
        });
       });

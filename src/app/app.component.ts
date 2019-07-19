@@ -35,18 +35,18 @@ export class AppComponent {
 
     
     this.initializeApp();
-    //this.GetRegister();
-    this.backButtonEvent();
+    this.GetRegister();
+    
   }
 
   initializeApp() {
     this.platform.ready().then(() => {
- //this.router.navigateByUrl('loginpin');
+
    //this.router.navigateByUrl('register');
      // this.router.navigateByUrl('addpin');
    //  this.router.navigateByUrl('confirm');
   //his.router.navigateByUrl('receipt');
-  this.router.navigateByUrl('/tabs/tab2');
+ // this.router.navigateByUrl('/tabs/tab2');
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
@@ -55,78 +55,7 @@ export class AppComponent {
 
 
 
-  backButtonEvent() {
-    this.platform.backButton.subscribe(async () => {
-        // close action sheet
-        try {
-            const element = await this.actionSheetCtrl.getTop();
-            if (element) {
-                element.dismiss();
-                return;
-            }
-        } catch (error) {
-        }
 
-        // close popover
-        try {
-            const element = await this.popoverCtrl.getTop();
-            if (element) {
-                element.dismiss();
-                return;
-            }
-        } catch (error) {
-        }
-
-        // close modal
-        try {
-            const element = await this.modalCtrl.getTop();
-            if (element) {
-                element.dismiss();
-                return;
-            }
-        } catch (error) {
-            console.log(error);
-
-        }
-
-        // close side menua
-        try {
-            const element = await this.menu.getOpen();
-            if (element) {
-                this.menu.close();
-                return;
-
-            }
-
-        } catch (error) {
-
-        }
-
-        this.routerOutlets.forEach((outlet: IonRouterOutlet) => {
-            if (outlet && outlet.canGoBack()) {
-                outlet.pop();
-
-            } else if (this.router.url === '/tab/tab2') {
-                if (new Date().getTime() - this.lastTimeBackPress < this.timePeriodToExit) {
-                    // this.platform.exitApp(); // Exit from app
-                    
-                    navigator['app'].exitApp(); // work in ionic 4
-
-                } else {
-                 
-                    this.toast.show(
-                        `Press back again to exit App.`,
-                        '2000',
-                        'center')
-                        .subscribe(toast => {
-                            // console.log(JSON.stringify(toast));
-                        });
-                    this.lastTimeBackPress = new Date().getTime();
-                }
-            }
-        });
-    });
-}
 
 GetRegister(){
 
@@ -138,6 +67,9 @@ GetRegister(){
      for (let i of this.RegisterCheck){
         if(i.St === "0"){
           this.router.navigateByUrl('register')
+        }
+        else{
+          this.router.navigateByUrl('loginpin');
         }
 
      }

@@ -96,8 +96,9 @@ for(let i of this.AddLoanPaymentRes){
     this.CustomerName = res
   for (let i1 of this.CustomerName){
 
-
+    this.closeModel();
   this.openModel(i.DocNo,i.AccountNo,i.AccountName,i.Mulct,i.TrackFee,i.LoanInterest, i1.CustomerName)
+
   }
 
 
