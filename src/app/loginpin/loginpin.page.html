@@ -11,12 +11,12 @@
   
     <h5 text-center margin-vertical style="color: white;font-weight: 500"  ><B>PIN</B></h5>
     <div text-center large margin-vertical style="color: white">
-       <ion-icon [name]="pin.length>0 ? 'radio-button-on' : 'radio-button-off'"></ion-icon>&nbsp;
+      <ion-icon [name]="pin.length>0 ? 'radio-button-on' : 'radio-button-off'"></ion-icon>&nbsp;
       <ion-icon [name]="pin.length>1 ? 'radio-button-on' : 'radio-button-off'"></ion-icon>&nbsp;
       <ion-icon [name]="pin.length>2 ? 'radio-button-on' : 'radio-button-off'"></ion-icon>&nbsp;
-      <ion-icon [name]="pin.length>3 ? 'radio-button-on' : 'radio-button-off'"></ion-icon> &nbsp;
-      <ion-icon [name]="pin.length>4 ? 'radio-button-on' : 'radio-button-off'"></ion-icon> &nbsp;
-      <ion-icon [name]="pin.length>5 ? 'radio-button-on' : 'radio-button-off'"></ion-icon> &nbsp;
+      <ion-icon [name]="pin.length>3 ? 'radio-button-on' : 'radio-button-off'"></ion-icon>&nbsp;
+      <ion-icon [name]="pin.length>4 ? 'radio-button-on' : 'radio-button-off'"></ion-icon>&nbsp;
+      <ion-icon [name]="pin.length>5 ? 'radio-button-on' : 'radio-button-off'"></ion-icon>&nbsp;
   <!--   <ion-icon [name]="pin.length>6 ? 'radio-button-on' : 'radio-button-off'"></ion-icon> &nbsp;
       <ion-icon [name]="pin.length>7 ? 'radio-button-on' : 'radio-button-off'"></ion-icon> --> 
       
@@ -68,22 +68,24 @@
             <ion-button style="color: white"   shape="round" fill="outline" class="round-button" (click)="handleInput('0')">0</ion-button>
           </ion-col>
           <ion-col>
-  
+           <br>
+            <ion-icon name="backspace" style="font-size: 50px; color:white;"  (click)="handleInput('clear')"></ion-icon>
+            <!--<ion-button style="color: white"   shape="round" fill="outline" class="round-button" (click)="handleInput('clear')"><ion-icon name="backspace"></ion-icon></ion-button>-->
           </ion-col>
         </ion-row>
-    <!--   <ion-row>
-          <ion-col>
+      <ion-row>
+         <!--   <ion-col>
             <ion-button clear large   fill="outline" class="Bt"  (click)="handleInput('clear')">ลบ</ion-button>
             
           </ion-col>
           <ion-col>
   
           </ion-col>
-          <ion-col>
+  <ion-col>
      
-            <ion-button clear large   fill="outline" class="Bt"  (click)="emitEvent()">ตกลง</ion-button>
-          </ion-col>
-        </ion-row>-->
+        <ion-button clear large   fill="outline" class="Bt"  (click)="emitEvent()">ตกลง</ion-button> 
+          </ion-col>--> 
+        </ion-row>
       </ion-grid>
     </div>
 

@@ -16,6 +16,7 @@ export class RegisterPage implements OnInit {
   Email:string="";
   Mobile:string="";
   AddRegisterRes:any=""
+  RegisterCheck:any=""
 
   constructor(private router: Router,public api: RestApiService,private storage: Storage) {
 
@@ -59,10 +60,29 @@ console.log(val)
     this.api.GetCustomerName(CustomerCode)
     .subscribe(res => {
       this.CustomeDetail = res
-
+  
 
       this.storage.set('CUSTOMERCODE',CustomerCode).then((val) =>{
      //เก็บรหัสมาชิกลงเครื่อง
+
+     //เช็คว่าเคยลงทะเบียนไหม
+     this.api.GetRegister(val)
+     .subscribe(res => {
+       this.RegisterCheck = res
+      for (let i of this.RegisterCheck){
+         if(i.FlagActive ===  true){
+           this.router.navigateByUrl('loginpin')
+         
+         }
+ 
+      }
+ 
+       console.log(res);
+     }, err => {
+       console.log(err);
+     
+     });
+
     console.log(val)
     
         },

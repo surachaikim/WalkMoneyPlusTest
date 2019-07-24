@@ -8,8 +8,16 @@
 </ion-header>-->
 
 <ion-content class="font1 Bg" *ngFor="let item of LoanPaymentRes">
-  <br> <br>
-    
+  <br>
+  <div text-center>
+      <ion-icon name="close-circle" style="font-size: 40px" (click)="closeModel()"></ion-icon> &nbsp;
+  </div>
+   
+  <br><br>
+  <div text-center>
+      <h2>เลขที่สัญญา : {{item.AccountNo}}</h2>
+  </div>  
+ 
     <ion-grid >
         <ion-row>
           <ion-col>

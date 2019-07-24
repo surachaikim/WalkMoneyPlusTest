@@ -52,7 +52,7 @@ export class AddpinPage implements OnInit {
       if(val==null){
     
         this.storage.set('Pinregister',this .pin).then((val) => {
-          alert("Pin : "+ val)
+         // alert("Pin : "+ val)
           this.pin=""
           this.pinshow =false
           this.pinconfirm= true

@@ -9,6 +9,11 @@ import { ActivatedRoute } from '@angular/router'
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { File } from '@ionic-native/file/ngx';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { FilePath } from '@ionic-native/file-path/ngx';
+import { getLocaleDateFormat } from '@angular/common';
+import { strict } from 'assert';
+import { DateTime } from '@mobiscroll/angular/src/js/presets/datetime';
 
 @Component({
   selector: 'app-receipt',
@@ -29,7 +34,14 @@ export class ReceiptPage implements OnInit {
   TrackFee=null;
   Mulct=null;
   DocNo=null;
-  constructor(private file: File,public toastController: ToastController,private router: Router,private activatedRoute :ActivatedRoute,private modalController:ModalController,private navParams:NavParams,private socialSharing: SocialSharing,private storage: Storage,private base64:Base64, private screenshot: Screenshot) { 
+  Namepic:string =this.Acc+"_"+this.DateToday
+  fileContents:string;
+  dirName:string
+  fileName:string
+  dirPath;
+  pic:any;
+
+  constructor(private filePath: FilePath,private file: File,public toastController: ToastController,private router: Router,private activatedRoute :ActivatedRoute,private modalController:ModalController,private navParams:NavParams,private socialSharing: SocialSharing,private storage: Storage,private base64:Base64, private screenshot: Screenshot) { 
     this.Payresult =this.navParams.get('data')
     this.name =this.navParams.get('data1')
      this.VFName =this.navParams.get('data2')
@@ -60,8 +72,11 @@ export class ReceiptPage implements OnInit {
 screenShot(){
   this.screenshot.URI().then(res =>{
 this.screen =res.URI
-this.saveimg0();
+//this.saveimg0();
+//this.SavePicture();
+this.SavePicture();
 this.state =true
+
 
   })
 }
@@ -98,34 +113,94 @@ closeModel(){
     this.router.navigateByUrl('/tabs/tab2');
   }
 
+
+
+
+
+
+
+
+
+  SavePicture(){
   
-  saveimg0(){
+
+let name = this.Acc 
+
+  this.screenshot.save('jpg', 80, name).then(res => {
+
+
+   
+   this.presentToast()
+
+
+ 
+});
+}
 
   
+  
+
+
+
+
+  saveimg0(){
+  
     let name = this.Acc 
-    let path =this.file.dataDirectory;
+    var folderName = "WalkMoneyPlus"
+    let path =this.file.externalRootDirectory+folderName ;
 
     
  
     // var data = this.screen(',')[1];
   // let blob =this.b64toblob(data,'image/png')
 
-   this.screenshot.save('jpg', 80, name).then(res => {
-     
+   this.screenshot.URI(80).then(res => {
+    
 
     this.base64.encodeFile(path).then((base64File :string) =>{
-    
-
       var res_cut =base64File;
+
+      this.file.checkDir(this.file.externalRootDirectory , 'WalkMoneyPlus').then(response => {
+ 
+   if(response!=null){
+   // let contentType= this.getContentType1(res_cut)
+    let blob 
+
+    this.file.writeFile(path,name+".jpg",blob, {replace: true}).then(res =>{
+      this.presentToast();
+    }, err =>{
+      console.log(err)
+    });
+    console.log('Directory exists'+response);
+   }
+
+   else{
+    this.file.createDir(this.file.externalRootDirectory, 'WalkMoneyPlus', false).then(response => {
+      console.log('Directory create'+response);
     
-  this.file.writeFile(path,name,res_cut).then(res =>{
-    this.presentToast();
-  }, err =>{
-    console.log(err)
-  });
-  
-     
-   
+     // let contentType= this.getContentType1(res_cut)
+      let blob 
+
+      this.file.writeFile(path,name+".jpg",blob, {replace: true}).then(res =>{
+        this.presentToast();
+      }, err =>{
+        console.log(err)
+      });
+    }).catch(err => {
+      console.log('Directory no create'+JSON.stringify(err));
+    }); 
+    
+   }
+      
+       
+      }).catch(err => {
+        console.log('Directory doesn\'t exist'+JSON.stringify(err));
+       
+      });
+
+
+    //  var res_cut =base64File;
+
      
      }, (err) =>{
        console.log(err)
@@ -142,6 +217,10 @@ closeModel(){
 
 
   }
+
+ 
+
+
  /* SaveImg010() {
   this.screenshot.save('jpg', 80, 'myscreenshot').then(res => {
     this.storage.get('imageSereen').then((val) =>{

@@ -2,6 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { RestApiService } from '../rest-api.service';
 import { Storage } from '@ionic/storage';
 import { LoadingController } from '@ionic/angular';
+import { mobiscroll, MbscDatetimeOptions } from '@mobiscroll/angular';
+
+mobiscroll.settings = {
+  theme: 'ios',
+  lang: 'th'
+};
+
+const now = new Date();
 
 @Component({
   selector: 'app-tab5',
@@ -9,6 +17,64 @@ import { LoadingController } from '@ionic/angular';
   styleUrls: ['./tab5.page.scss'],
 })
 export class Tab5Page implements OnInit {
+
+
+  date = now;
+  sep = now;
+  month_only = now;
+  month = now;
+  year = now;
+  day = now;
+  atom = now;
+  cookie = now;
+  time = now;
+  h12 = now;
+  h24 = now;
+  hms = now;
+  datetime = now;
+  datetimeDay = now;
+  
+  dateSettings: MbscDatetimeOptions = {
+      dateFormat: 'dd.mm.yy'
+  };
+  sepSettings: MbscDatetimeOptions = {
+      dateFormat: 'dd.mm.yy'
+  };
+  month_onlySettings: MbscDatetimeOptions = {
+      dateFormat: 'MM'
+  };
+  monthSettings: MbscDatetimeOptions = {
+      dateFormat: 'd MM yy'
+  };
+  yearSettings: MbscDatetimeOptions = {
+      dateFormat: 'mm/yy'
+  };
+  daySettings: MbscDatetimeOptions = {
+      dateFormat: 'D d M, yy'
+  };
+  atomSettings: MbscDatetimeOptions = {
+      dateFormat: 'yy-mm-dd'
+  };
+  cookieSettings: MbscDatetimeOptions = {
+      dateFormat: 'D, dd M yy'
+  };
+  h12Settings: MbscDatetimeOptions = {
+      timeFormat: 'hh:ii A'
+  };
+  h24Settings: MbscDatetimeOptions = {
+      timeFormat: 'HH:ii'
+  };
+  hmsSettings: MbscDatetimeOptions = {
+      timeFormat: 'HH:ii:ss',
+      headerText: 'Time: {value}'
+  };
+  datetimeDaySettings: MbscDatetimeOptions = {
+      dateFormat: 'D d M, yy',
+      timeFormat: 'H:ii',
+      dateWheels: '|D d M, yy|'
+  };
+
+
   SumAmountList :any;
   SumAmount :any;
   amount:string="00";

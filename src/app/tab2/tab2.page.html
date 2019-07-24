@@ -49,17 +49,17 @@
 <h1 *ngIf="state" class="font1"  text-center > ไม่พบข้อมูลสมาชิก</h1>
 
 <ion-list>
-    <ion-item *ngFor="let item of SearchLoanAccountRes" (click)='getAccountLoan(item.PersonId,item.PersonName)'>
-     
+    <ion-item *ngFor="let item of SearchLoanAccountResNew" (click)='getAccountLoan(item.PersonID,item.PersonName)'>
+     <!-- <ion-skeleton-text animated></ion-skeleton-text>-->  
+        <ion-ripple-effect></ion-ripple-effect>
         <ion-thumbnail slot="start">
-            <ion-skeleton-text animated></ion-skeleton-text>
-            <ion-ripple-effect></ion-ripple-effect>
+        
           <img src="../../assets/img/person1.png">
         </ion-thumbnail>
         <ion-label >
          <h2 style="font-size:18px">{{item.PersonName}}   </h2> 
          <p>{{item.IDCard}}   </p> 
-         <p>{{item.PersonId}}   </p> 
+         <p>{{item.PersonID}}   </p> 
         </ion-label>
         
       </ion-item>

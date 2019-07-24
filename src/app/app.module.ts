@@ -1,3 +1,4 @@
+import { MbscModule } from '@mobiscroll/angular';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
@@ -11,6 +12,7 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HTTP } from '@ionic-native/http/ngx';
 import { PaydebtPageModule } from './paydebt/paydebt.module'
+
 import { ModalPageModule } from './modal/modal.module'
 import { ReceiptPageModule } from './receipt/receipt.module'
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
@@ -22,13 +24,17 @@ import { Device } from '@ionic-native/device/ngx';
 import { Toast } from '@ionic-native/toast/ngx';
 import { Keyboard } from '@ionic-native/keyboard/ngx';
 import { File } from '@ionic-native/file/ngx';
+import { DecimalPipe } from '@angular/common';
+import { FilePath } from '@ionic-native/file-path/ngx';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [
  
   ],
-  imports: [BrowserModule,
+  imports: [ 
+    MbscModule, BrowserModule,
     PaydebtPageModule,
+
     ReceiptPageModule,
     ModalPageModule,
      IonicModule.forRoot(),
@@ -43,10 +49,10 @@ import { File } from '@ionic-native/file/ngx';
     BarcodeScanner,
     SocialSharing,
     HTTP,
-    Toast,File,
+    Toast,File,FilePath,
     Device,
     Keyboard,
-    Base64,
+    Base64,DecimalPipe,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

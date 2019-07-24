@@ -6,6 +6,7 @@ import { Platform, LoadingController } from '@ionic/angular';
 import { finalize } from 'rxjs/operators';
 import { RestApiService } from '../rest-api.service';
 import { PaydebtPage } from '../paydebt/paydebt.page';
+
 import { NavController,ModalController,PopoverController} from '@ionic/angular'
 import { AlertController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
@@ -19,6 +20,7 @@ import { Toast } from '@ionic-native/toast/ngx';
 import {Router} from '@angular/router';
 import { Keyboard } from '@ionic-native/keyboard/ngx';
 import { OnInit, OnDestroy, AfterViewInit } from '@angular/core';
+
 
 @Component({
   selector: 'app-tab2',
@@ -58,6 +60,7 @@ export class Tab2Page implements  OnDestroy, AfterViewInit {
   UUid :string="1234567890"
   state:boolean =false
   SearchLoanAccountRes:any;
+  SearchLoanAccountResNew= [];
   barcodeScannerOptions: BarcodeScannerOptions;
 
   @ViewChild(IonRouterOutlet) routerOutlet: IonRouterOutlet;
@@ -138,11 +141,24 @@ export class Tab2Page implements  OnDestroy, AfterViewInit {
 
     this.storage.get('CUSTOMERCODE').then((val) => {
 console.log(val)
-      this.api.SearchLoanAccount(val,this.Id)
+      this.api.SearchPerson(val,this.Id)
       .subscribe(res => {
         this.SearchLoanAccountRes = res
-       for (let i of this.SearchLoanAccountRes){
-          if(i.AccountNo === ""){
+
+        this.SearchLoanAccountResNew = [];
+        for(let i = 0;i < res.length; i++){
+          if(this.SearchLoanAccountResNew.indexOf(res[i]) == -1){
+            this.SearchLoanAccountResNew.push(res[i])
+          }
+      }
+
+
+       for (let o of this.SearchLoanAccountRes){
+
+       // let unique_array = []
+     
+
+          if(o.AccountNo === ""){
             this.state =true
             return;
           }
@@ -151,7 +167,7 @@ console.log(val)
 
 
 
-        console.log(res);
+        console.log(this.SearchLoanAccountRes);
       }, err => {
         console.log(err);
        // alert(err)
@@ -159,7 +175,7 @@ console.log(val)
   
       });
 
-     
+  
         
   }
 
@@ -211,12 +227,12 @@ this.keyboard.hide();
 
 
   
- async getAccountLoan(PersonId,PersonName){
+ async getAccountLoan(PersonID,PersonName){
 
     const modal = await this.modalController.create({
       component:PaydebtPage,
       componentProps:{
-        data: PersonId,
+        data: PersonID,
         data1: PersonName
       }
     });

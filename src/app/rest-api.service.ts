@@ -114,10 +114,10 @@ export class RestApiService {
 
    }
 
-   SearchLoanAccount(CustomerCode: string,textSearch: string): Observable<any> {
+   SearchPerson(CustomerCode: string,textSearch: string): Observable<any> {
    
 
-  const url = apiUrl+'SearchLoanAccount?ReceiveUser=' + this.ReceiveUser + '&ReceivePassWord='+ this.ReceivePassWord  +'&CustomerCode='+CustomerCode+'&RegisterNo='+  this.device.uuid  +'&textSearch='+textSearch
+  const url = apiUrl+'SearchPerson?ReceiveUser=' + this.ReceiveUser + '&ReceivePassWord='+ this.ReceivePassWord  +'&CustomerCode='+CustomerCode+'&RegisterNo='+  this.device.uuid  +'&textSearch='+textSearch
      return this.http.get(url).pipe(
        map(this.extractData),
        catchError(this.handleError));

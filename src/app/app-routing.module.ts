@@ -13,7 +13,8 @@ const routes: Routes = [
   { path: 'tab4', loadChildren: './tab4/tab4.module#Tab4PageModule' },
   { path: 'about', loadChildren: './about/about.module#AboutPageModule' },
   { path: 'tab5', loadChildren: './tab5/tab5.module#Tab5PageModule' },
-  { path: 'addpin', loadChildren: './addpin/addpin.module#AddpinPageModule' }
+  { path: 'addpin', loadChildren: './addpin/addpin.module#AddpinPageModule' },
+
 ];
 @NgModule({
   imports: [

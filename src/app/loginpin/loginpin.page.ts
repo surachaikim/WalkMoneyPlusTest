@@ -117,7 +117,10 @@ for (let i of this.Pincheck){
 
   handleInput(pin: string) {
     if (pin === "clear") {
-      this.pin = "";
+     
+    
+    this.pin = this.pin.slice(0,-1);
+     // this.pin = "";
       return;
     }
 
