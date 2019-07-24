@@ -13,7 +13,7 @@ import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { FilePath } from '@ionic-native/file-path/ngx';
 import { getLocaleDateFormat } from '@angular/common';
 import { strict } from 'assert';
-import { DateTime } from '@mobiscroll/angular/src/js/presets/datetime';
+
 
 @Component({
   selector: 'app-receipt',

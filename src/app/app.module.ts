@@ -1,4 +1,4 @@
-import { MbscModule } from '@mobiscroll/angular';
+
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
@@ -32,7 +32,7 @@ import { FilePath } from '@ionic-native/file-path/ngx';
  
   ],
   imports: [ 
-    MbscModule, BrowserModule,
+     BrowserModule,
     PaydebtPageModule,
 
     ReceiptPageModule,
@@ -41,6 +41,7 @@ import { FilePath } from '@ionic-native/file-path/ngx';
       AppRoutingModule,
       FormsModule,
       IonicStorageModule.forRoot(),
+   //   IonicModule.forRoot({hardwareBackButton: false}),
        HttpClientModule],
   providers: [
     StatusBar,

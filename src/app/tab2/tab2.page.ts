@@ -28,8 +28,9 @@ import { OnInit, OnDestroy, AfterViewInit } from '@angular/core';
   styleUrls: ['tab2.page.scss']
   
 })
-export class Tab2Page implements  OnDestroy, AfterViewInit {
-  backButtonSubscription; 
+export class Tab2Page {
+//export class Tab2Page implements  OnDestroy, AfterViewInit {
+ // backButtonSubscription; 
 
 
 
@@ -241,7 +242,7 @@ this.keyboard.hide();
   }
 
  
-  ngAfterViewInit() {
+  /*ngAfterViewInit() {
     this.backButtonSubscription = this.platform.backButton.subscribe(() => {
       navigator['app'].exitApp();
     });
@@ -249,5 +250,5 @@ this.keyboard.hide();
  
   ngOnDestroy() {
     this.backButtonSubscription.unsubscribe();
-  }
+  }*/
 }

@@ -42,7 +42,7 @@ async  logout(){
             
                // this.router.navigateByUrl('loginpin');
             
-                  navigator['app'].exitApp();
+                 navigator['app'].exitApp();
               
                   
                    
