@@ -33,7 +33,7 @@ export class AddpinPage implements OnInit {
 
   handleInput(pin: string) {
     if (pin === "clear") {
-      this.pin = "";
+      this.pin = this.pin.slice(0,-1);
       return;
     }
 

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RestApiService } from '../rest-api.service';
 import { Storage } from '@ionic/storage';
 import {Router} from '@angular/router';
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.page.html',

@@ -34,6 +34,7 @@ export class ReceiptPage implements OnInit {
   TrackFee=null;
   Mulct=null;
   DocNo=null;
+  Capital=null;
   Namepic:string =this.Acc+"_"+this.DateToday
   fileContents:string;
   dirName:string
@@ -50,7 +51,7 @@ export class ReceiptPage implements OnInit {
       this.TrackFee =this.navParams.get('data5')
       this.LoanInterest =this.navParams.get('data6')
       this.DocNo =this.navParams.get('data7')
-   
+      this.Capital =this.navParams.get('data8')
   }
 
 

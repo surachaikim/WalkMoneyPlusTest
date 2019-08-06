@@ -18,6 +18,10 @@ export class AppComponent {
   @ViewChildren(IonRouterOutlet) routerOutlets: QueryList<IonRouterOutlet>;
   Uuid :string ="1234567890"
   Checkregister:any
+
+
+
+ 
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
@@ -36,6 +40,8 @@ export class AppComponent {
     
     this.initializeApp();
     this.GetRegister();
+   
+    
     
   }
 
@@ -87,4 +93,10 @@ GetRegister(){
    
       
 }
+
+
+
+
+
+
 }

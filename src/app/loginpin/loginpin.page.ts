@@ -8,24 +8,45 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
 import { componentFactoryName } from '@angular/compiler';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import {  OnDestroy, AfterViewInit } from '@angular/core';
+import { Platform  ,IonRouterOutlet,} from '@ionic/angular';
+import { AlertController } from '@ionic/angular';
+import { ViewChild } from '@angular/core';
 @Component({
   selector: 'app-loginpin',
   templateUrl: './loginpin.page.html',
   styleUrls: ['./loginpin.page.scss'],
 })
 export class LoginpinPage implements OnInit {
+
+//export class LoginpinPage implements  OnDestroy, AfterViewInit {
+ backButtonSubscription; 
   pin:string= "";
   Uuid:string ="1234567890"
   authState = new BehaviorSubject(false);
   public CustomerName:any;
   public Pincheck: any;
   CompName:string="";
+  BranchName:string="";
   CompId:string="";
   CustomerCode:string="";
   @Output() change: EventEmitter<string> = new EventEmitter<string>();
-  constructor(private statusBar: StatusBar, private storage: Storage,public http: HttpClient,private router: Router,public api: RestApiService, public loadingController: LoadingController) {
+  @ViewChild(IonRouterOutlet) routerOutlet: IonRouterOutlet;
+  constructor(public alertController: AlertController,private platform: Platform,private statusBar: StatusBar, private storage: Storage,public http: HttpClient,private router: Router,public api: RestApiService, public loadingController: LoadingController) {
     this.statusBar.backgroundColorByHexString('#084880');
- 
+
+    this.platform.backButton.subscribeWithPriority(0, () => {
+      if (this.routerOutlet && this.routerOutlet.canGoBack()) {
+        this.routerOutlet.pop();
+      } else if (this.router.url === '/loginpin') {
+       // this.platform.exitApp(); 
+  
+        // or if that doesn't work, try
+        navigator['app'].exitApp();
+      } else {
+        //this.generic.showAlert("Exit", "Do you want to exit the app?", this.onYesHandler, this.onNoHandler, "backPress");
+      }
+    });
    }
 
   ngOnInit() {
@@ -73,7 +94,8 @@ for (let i of this.Pincheck){
           // set ค่าข้อมูลผู้เข้าใช้      
           UserId: i.UserId,        
           CompName: this.CompName,
-          CustomerCode: this.CustomerCode 
+          CustomerCode: this.CustomerCode ,
+          BranchName:i.BranchName
         }
 
         this.storage.set('USER_INFO',UserInfo).then((val) =>{
@@ -139,4 +161,42 @@ for (let i of this.Pincheck){
   }
 
 
+
+ 
+/*ngAfterViewInit() {
+    this.backButtonSubscription = this.platform.backButton.subscribe(() => {
+
+      this.presentAlertConfirm()
+     
+    });
+  }
+ 
+ ngOnDestroy() {
+    this.backButtonSubscription.unsubscribe();
+  }
+
+  async presentAlertConfirm() {
+    const alert = await this.alertController.create({
+      header: 'ออกโปรแกรม!',
+      message: '<strong>คุณต้องปิดโปรแกรม ?</strong>!!!',
+      buttons: [
+        {
+          text: 'ยกเลิก',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        }, {
+          text: 'ตกลง',
+          handler: () => {
+            navigator['app'].exitApp();
+            console.log('Confirm Okay');
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }*/
 }

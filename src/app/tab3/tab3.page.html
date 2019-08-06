@@ -1,11 +1,21 @@
 <ion-header>
     <ion-toolbar color="primary">
       <ion-title class="font1" style="height: 100px">
-        <div>
-          <h6>บริษัท:  {{ VFName }}</h6> 
-  
-          <h6>รหัสผู้ใช้งาน: {{ UserId }}</h6>
-       </div>
+          <ion-item color="primary" >
+              <ion-thumbnail slot="start">
+                  <img src="assets/img/company.png" width="80px" height="100px">
+          
+                </ion-thumbnail>
+           
+              <ion-label >
+               <h3 class="font1">บริษัท : {{VFName}}</h3>
+               <h4 class="font1">รหัสผู้ใช้งาน : {{UserId}}</h4>
+               <h4 class="font1">สาขา : {{BranchName}}</h4>
+              </ion-label>
+           
+              
+          
+            </ion-item>
    
       </ion-title>
     </ion-toolbar>

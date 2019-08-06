@@ -12,6 +12,7 @@ export class Tab3Page {
   Statement:any;
   VFName:string="";
   UserId:string="";
+  BranchName:string="";
   SumAmount :any;
   SumAmountList :any;
   amount:string="00";
@@ -26,6 +27,7 @@ export class Tab3Page {
    this.storage.get('USER_INFO').then((val) => {
     this.UserId = val.UserId // ดึงข้อมูลผู้ใช้งาน
      this.VFName =val.CompName
+     this.BranchName=val.BranchName
     });
      this.getSumAll();
    //  this.getSumAllList();

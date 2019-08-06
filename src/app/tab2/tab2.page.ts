@@ -53,6 +53,7 @@ export class Tab2Page {
   Uuid:string="1234567890";
   VFName:string="";
   UserId:string="";
+  BranchName:string="";
   CustomerCode:string="";
   title:string="";
   chkPerson:string="";
@@ -85,6 +86,7 @@ export class Tab2Page {
         this.storage.get('USER_INFO').then((val) => {
           this.UserId = val.UserId // ดึงข้อมูลผู้ใช้งาน
            this.VFName =val.CompName
+           this.BranchName=val.BranchName
            this.CustomerCode =val.CustomerCode
           });
 
@@ -202,6 +204,7 @@ async openModel(){
     }
   });
   modal.present();
+  
 }
 else{
   alert("ไม่มีรายการชำระ")
@@ -222,14 +225,16 @@ this.keyboard.hide();
 
 
   onCancel(event){
- 
+
 
       }
 
 
   
  async getAccountLoan(PersonID,PersonName){
-
+  this.Id=""
+  this.SearchLoanAccountResNew =[];
+  
     const modal = await this.modalController.create({
       component:PaydebtPage,
       componentProps:{

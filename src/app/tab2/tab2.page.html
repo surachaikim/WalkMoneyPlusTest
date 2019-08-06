@@ -1,13 +1,21 @@
 <ion-header>
   <ion-toolbar style="height: 100px" class="font1">
     <ion-title >
-     <div>
-        <h6>บริษัท:  {{ VFName }}</h6> 
-
-        <h6>รหัสผู้ใช้งาน: {{ UserId }}</h6>
-     </div>
-
- 
+        <ion-item color="primary" >
+            <ion-thumbnail slot="start">
+                <img src="assets/img/company.png" width="80px" height="100px">
+        
+              </ion-thumbnail>
+         
+            <ion-label >
+             <h3 class="font1">&nbsp;บริษัท : {{VFName}}</h3>
+             <h4 class="font1">&nbsp;รหัสผู้ใช้งาน : {{UserId}}</h4>
+             <h4 class="font1">&nbsp;สาขา : {{BranchName}}</h4>
+            </ion-label>
+         
+            
+        
+          </ion-item>
  
 
     </ion-title>
@@ -31,7 +39,11 @@
 
       </ion-col>
       <ion-col>
-          <img src="assets\img\QR.png" width="55px" height="55px"  (click)="scanCode()">
+        <div class="ion-activatable">
+            <ion-ripple-effect></ion-ripple-effect>
+            <img src="assets\img\QR.png" width="55px" height="55px"  (click)="scanCode()">
+        </div>
+         
             
    
         <!--  <ion-button style="font-size: 13px; color:red;"  size="small" shape="round" fill="outline" (click)="scanCode()">แสกน QR Code</ion-button>-->
@@ -48,10 +60,12 @@
 <br>
 <h1 *ngIf="state" class="font1"  text-center > ไม่พบข้อมูลสมาชิก</h1>
 
+
+   
 <ion-list>
-    <ion-item *ngFor="let item of SearchLoanAccountResNew" (click)='getAccountLoan(item.PersonID,item.PersonName)'>
+    <ion-item button *ngFor="let item of SearchLoanAccountResNew" (click)='getAccountLoan(item.PersonID,item.PersonName)'>
      <!-- <ion-skeleton-text animated></ion-skeleton-text>-->  
-        <ion-ripple-effect></ion-ripple-effect>
+     <ion-ripple-effect></ion-ripple-effect>
         <ion-thumbnail slot="start">
         
           <img src="../../assets/img/person1.png">

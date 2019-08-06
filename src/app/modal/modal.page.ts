@@ -59,7 +59,7 @@ export class ModalPage implements OnInit {
   loading.present();
   this.storage.get('CUSTOMERCODE').then((val) => {
     console.log(val)
-  this.api.LoanPayment(val,this.AccountNo,"1","0", this.minpayment,this.mulct,this.trackfee,this.closefee)
+  this.api.LoanPayment(val,this.AccountNo,"1","0", this.Payresult,this.mulct,this.trackfee,this.closefee)
     .subscribe(res => {
       this.LoanPaymentRes = res
 
@@ -85,7 +85,7 @@ export class ModalPage implements OnInit {
   loading.present();
   this.storage.get('CUSTOMERCODE').then((val) => {
     console.log(val)
-  this.api.LoanPayment(val,this.AccountNo,"1","1", this.minpayment,this.mulct,this.trackfee,this.closefee)
+  this.api.LoanPayment(val,this.AccountNo,"1","1", this.Payresult,this.mulct,this.trackfee,this.closefee)
     .subscribe(res => {
       this.AddLoanPaymentRes = res
 for(let i of this.AddLoanPaymentRes){
@@ -97,7 +97,7 @@ for(let i of this.AddLoanPaymentRes){
   for (let i1 of this.CustomerName){
 
     this.closeModel();
-  this.openModel(i.DocNo,i.AccountNo,i.AccountName,i.Mulct,i.TrackFee,i.LoanInterest, i1.CustomerName)
+  this.openModel(i.DocNo,i.AccountNo,i.AccountName,i.Mulct,i.TrackFee,i.LoanInterest, i1.CustomerName,i.Capital)
 
   }
 
@@ -122,7 +122,7 @@ for(let i of this.AddLoanPaymentRes){
 
 }
 
-async openModel(DocNo,AccountNo,AccountName,Mulct,TrackFee,LoanInterest,CustomerName){
+async openModel(DocNo,AccountNo,AccountName,Mulct,TrackFee,LoanInterest,CustomerName,Capital){
  
 
   
@@ -138,7 +138,8 @@ async openModel(DocNo,AccountNo,AccountName,Mulct,TrackFee,LoanInterest,Customer
      data4:Mulct,
      data5:TrackFee,
      data6:LoanInterest,
-     data7:DocNo
+     data7:DocNo,
+     data8:Capital
     }
   });
   modal.present();

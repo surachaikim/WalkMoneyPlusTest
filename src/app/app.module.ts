@@ -15,6 +15,7 @@ import { PaydebtPageModule } from './paydebt/paydebt.module'
 
 import { ModalPageModule } from './modal/modal.module'
 import { ReceiptPageModule } from './receipt/receipt.module'
+
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { FormsModule } from '@angular/forms';
 import { Screenshot } from '@ionic-native/screenshot/ngx';
@@ -34,7 +35,7 @@ import { FilePath } from '@ionic-native/file-path/ngx';
   imports: [ 
      BrowserModule,
     PaydebtPageModule,
-
+ 
     ReceiptPageModule,
     ModalPageModule,
      IonicModule.forRoot(),

@@ -30,7 +30,7 @@ export class RestApiService {
         `body was: ${error.error}`);
     }
     // return an observable with a user-facing error message
-    return throwError('Something bad happened; please try again later.'+ error.error);
+    return throwError('ไม่สามารถเชื่อมต่อ Service ได้ กรุณาติดต่อ MixproAdvanc.');
   }
   
   private extractData(res: Response) {
@@ -45,7 +45,7 @@ export class RestApiService {
   
   checkregister(UUid:string): Observable<any> {
     // const url = `${apiUrl}/${code}/${pin}`;
-    const url = apiUrl +'CheckRegisterNo?ReceiveUser=' + this.ReceiveUser + '&ReceivePassWord='+ this.ReceivePassWord  +'&RegisterNo=' +  this.device.uuid 
+    const url = apiUrl +'CheckRegisterNo?ReceiveUser=' + this.ReceiveUser + '&ReceivePassWord='+ this.ReceivePassWord  +'&RegisterNo=' +  this.device.serial 
      return this.http.get(url).pipe(
        map(this.extractData),
        catchError(this.handleError));
@@ -63,7 +63,7 @@ export class RestApiService {
    GetRegister(CustomerCode: string): Observable<any> {
    
   
-    const url = apiUrl+'GetRegister?ReceiveUser=' + this.ReceiveUser + '&ReceivePassWord='+ this.ReceivePassWord  +'&CustomerCode='+CustomerCode+'&RegisterNo='+  this.device.uuid 
+    const url = apiUrl+'GetRegister?ReceiveUser=' + this.ReceiveUser + '&ReceivePassWord='+ this.ReceivePassWord  +'&CustomerCode='+CustomerCode+'&RegisterNo='+  this.device.serial 
     return this.http.get(url).pipe(
       map(this.extractData),
       catchError(this.handleError));
@@ -75,7 +75,7 @@ export class RestApiService {
    
  
     const url = apiUrl+'AddRegister?ReceiveUser=' + this.ReceiveUser + '&ReceivePassWord='+ this.ReceivePassWord  +'&CustomerCode='+CustomerCode+'&FirstName='+ FirstName +'&LastName='+ LastName +
-                   '&Email='+ Email + '&Mobile=' + Mobile +'&RegisterNo='+  this.device.uuid 
+                   '&Email='+ Email + '&Mobile=' + Mobile +'&RegisterNo='+  this.device.serial  
      return this.http.get(url).pipe(
        map(this.extractData),
        catchError(this.handleError));
@@ -85,7 +85,7 @@ export class RestApiService {
    ActiveRegister1(CustomerCode: string,ReferenceCode:string,UserName:string,password:string): Observable<any> {
    
     const url = apiUrl+'ActiveRegister?ReceiveUser=' + this.ReceiveUser + '&ReceivePassWord='+ this.ReceivePassWord  +'&CustomerCode='+CustomerCode+'&ReferenceCode='+ ReferenceCode +'&UserName='+ UserName +
-                   '&password='+ password  +'&RegisterNo='+  this.device.uuid 
+                   '&password='+ password  +'&RegisterNo='+  this.device.serial 
      return this.http.get(url).pipe(
        map(this.extractData),
        catchError(this.handleError));
@@ -94,7 +94,7 @@ export class RestApiService {
    AddPassCode(CustomerCode: string,pin:string): Observable<any> {
    
  
-    const url = apiUrl+'AddPassCode?ReceiveUser=' + this.ReceiveUser + '&ReceivePassWord='+ this.ReceivePassWord  +'&CustomerCode='+CustomerCode+'&PassCode='+ pin +'&RegisterNo='+  this.device.uuid 
+    const url = apiUrl+'AddPassCode?ReceiveUser=' + this.ReceiveUser + '&ReceivePassWord='+ this.ReceivePassWord  +'&CustomerCode='+CustomerCode+'&PassCode='+ pin +'&RegisterNo='+  this.device.serial 
      return this.http.get(url).pipe(
        map(this.extractData),
        catchError(this.handleError));
@@ -105,7 +105,7 @@ export class RestApiService {
    
 
     
-    const url = apiUrl+'GetRegister?ReceiveUser=' + this.ReceiveUser + '&ReceivePassWord='+ this.ReceivePassWord  +'&CustomerCode='+CustomerCode+'&RegisterNo='+  this.device.uuid 
+    const url = apiUrl+'GetRegister?ReceiveUser=' + this.ReceiveUser + '&ReceivePassWord='+ this.ReceivePassWord  +'&CustomerCode='+CustomerCode+'&RegisterNo='+  this.device.serial 
     return this.http.get(url).pipe(
       map(this.extractData),
       catchError(this.handleError));
@@ -117,7 +117,7 @@ export class RestApiService {
    SearchPerson(CustomerCode: string,textSearch: string): Observable<any> {
    
 
-  const url = apiUrl+'SearchPerson?ReceiveUser=' + this.ReceiveUser + '&ReceivePassWord='+ this.ReceivePassWord  +'&CustomerCode='+CustomerCode+'&RegisterNo='+  this.device.uuid  +'&textSearch='+textSearch
+  const url = apiUrl+'SearchPerson?ReceiveUser=' + this.ReceiveUser + '&ReceivePassWord='+ this.ReceivePassWord  +'&CustomerCode='+CustomerCode+'&RegisterNo='+  this.device.serial   +'&textSearch='+textSearch
      return this.http.get(url).pipe(
        map(this.extractData),
        catchError(this.handleError));
@@ -131,7 +131,7 @@ export class RestApiService {
 
    GetLoanAccountByPersonId(CustomerCode: string,Id: string): Observable<any> {
     // const url = `${apiUrl}/${code}/${pin}`;
-    const url =apiUrl + 'GetLoanAccountByPersonId?ReceiveUser=' + this.ReceiveUser + '&ReceivePassWord='+ this.ReceivePassWord  +'&RegisterNo=' +   this.device.uuid  +'&PersonId='+ Id +'&CustomerCode='+CustomerCode
+    const url =apiUrl + 'GetLoanAccountByPersonId?ReceiveUser=' + this.ReceiveUser + '&ReceivePassWord='+ this.ReceivePassWord  +'&RegisterNo=' +   this.device.serial   +'&PersonId='+ Id +'&CustomerCode='+CustomerCode
   
      return this.http.get(url).pipe(
        map(this.extractData),
@@ -143,7 +143,7 @@ export class RestApiService {
 
    GetDetailPayByAccountNo(CustomerCode: string,LoanNo: string,StatusPay:string): Observable<any> {
     // const url = `${apiUrl}/${code}/${pin}`;
-    const url =apiUrl + 'GetDetailPayByAccountNo?ReceiveUser=' + this.ReceiveUser + '&ReceivePassWord='+ this.ReceivePassWord  +'&RegisterNo=' +   this.device.uuid  +'&LoanNo='+ LoanNo +'&CustomerCode='+CustomerCode +'&StatusPay='+StatusPay
+    const url =apiUrl + 'GetDetailPayByAccountNo?ReceiveUser=' + this.ReceiveUser + '&ReceivePassWord='+ this.ReceivePassWord  +'&RegisterNo=' +   this.device.serial   +'&LoanNo='+ LoanNo +'&CustomerCode='+CustomerCode +'&StatusPay='+StatusPay
   
      return this.http.get(url).pipe(
        map(this.extractData),
@@ -154,7 +154,7 @@ export class RestApiService {
 
    LoanPayment(CustomerCode: string,LoanNo: string,StatusPay:string,FlagSave:string,TotalPayAmount:string,MulctPay:string,TrackFee:string,CloseFee:string): Observable<any> {
     // const url = `${apiUrl}/${code}/${pin}`;
-    const url =apiUrl + 'LoanPayment?ReceiveUser=' + this.ReceiveUser + '&ReceivePassWord='+ this.ReceivePassWord  +'&RegisterNo=' +  this.device.uuid  +'&LoanNo='+ LoanNo +'&CustomerCode='+CustomerCode +'&StatusPay='+StatusPay+
+    const url =apiUrl + 'LoanPayment?ReceiveUser=' + this.ReceiveUser + '&ReceivePassWord='+ this.ReceivePassWord  +'&RegisterNo=' +  this.device.serial   +'&LoanNo='+ LoanNo +'&CustomerCode='+CustomerCode +'&StatusPay='+StatusPay+
             '&FlagSave='+ FlagSave + '&TotalPayAmount='+TotalPayAmount + '&MulctPay='+MulctPay + '&TrackFee='+TrackFee +'&CloseFee='+CloseFee
   
      return this.http.get(url).pipe(
@@ -168,7 +168,7 @@ export class RestApiService {
    getSumAll(CustomerCode: string): Observable<any> {
     // const url = `${apiUrl}/${code}/${pin}`;
     
-    const url =apiUrl + 'GetSumTransactionByDate?ReceiveUser=' + this.ReceiveUser + '&ReceivePassWord='+ this.ReceivePassWord  +'&RegisterNo=' +  this.device.uuid  +'&CustomerCode='+ CustomerCode+'&Date1='+'' + '&Date2='+''
+    const url =apiUrl + 'GetSumTransactionByDate?ReceiveUser=' + this.ReceiveUser + '&ReceivePassWord='+ this.ReceivePassWord  +'&RegisterNo=' +  this.device.serial   +'&CustomerCode='+ CustomerCode+'&Date1='+'' + '&Date2='+''
   
      return this.http.get(url).pipe(
        map(this.extractData),
@@ -177,7 +177,7 @@ export class RestApiService {
 
    getSumAllList(CustomerCode: string): Observable<any> {
     // const url = `${apiUrl}/${code}/${pin}`;
-    const url =apiUrl + 'GetTransactionMobile?ReceiveUser=' + this.ReceiveUser + '&ReceivePassWord='+ this.ReceivePassWord  +'&RegisterNo=' +   this.device.uuid  +'&CustomerCode='+ CustomerCode+'&Date1='+'' + '&Date2='+''
+    const url =apiUrl + 'GetTransactionMobile?ReceiveUser=' + this.ReceiveUser + '&ReceivePassWord='+ this.ReceivePassWord  +'&RegisterNo=' +   this.device.serial   +'&CustomerCode='+ CustomerCode+'&Date1='+'' + '&Date2='+''
   
      return this.http.get(url).pipe(
        map(this.extractData),
@@ -186,7 +186,7 @@ export class RestApiService {
 
    InsertloanTrans(AccountNo: string,Amount:string,user:string,AccountName:string): Observable<any> {
     // const url = `${apiUrl}/${code}/${pin}`;
-    const url =apiUrl + 'InsertLoanTrans?ReceiveUser=' + this.ReceiveUser + '&ReceivePassWord='+ this.ReceivePassWord  +'&RegisterNo=' +   this.device.uuid   +'&AccountNo='+ AccountNo+ '&AccountName='+AccountName +'&Amount='+Amount+'&UserId='+user
+    const url =apiUrl + 'InsertLoanTrans?ReceiveUser=' + this.ReceiveUser + '&ReceivePassWord='+ this.ReceivePassWord  +'&RegisterNo=' +   this.device.serial    +'&AccountNo='+ AccountNo+ '&AccountName='+AccountName +'&Amount='+Amount+'&UserId='+user
   
      return this.http.get(url).pipe(
        map(this.extractData),
@@ -197,7 +197,7 @@ export class RestApiService {
    
    InsertRegister(AccountNo: string,Amount:string,user:string,AccountName:string): Observable<any> {
     // const url = `${apiUrl}/${code}/${pin}`;
-    const url =apiUrl + 'InsertLoanTrans?ReceiveUser=' + this.ReceiveUser + '&ReceivePassWord='+ this.ReceivePassWord  +'&RegisterNo=' +   this.device.uuid  +'&AccountNo='+ AccountNo+ '&AccountName='+AccountName +'&Amount='+Amount+'&UserId='+user
+    const url =apiUrl + 'InsertLoanTrans?ReceiveUser=' + this.ReceiveUser + '&ReceivePassWord='+ this.ReceivePassWord  +'&RegisterNo=' +   this.device.serial  +'&AccountNo='+ AccountNo+ '&AccountName='+AccountName +'&Amount='+Amount+'&UserId='+user
   
      return this.http.get(url).pipe(
        map(this.extractData),

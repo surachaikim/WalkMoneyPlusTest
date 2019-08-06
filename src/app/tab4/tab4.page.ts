@@ -69,7 +69,10 @@ about(){
 
   
 
-
+settingservice(){
+  
+  this.router.navigate(['settingservice']);
+}
 
    
   

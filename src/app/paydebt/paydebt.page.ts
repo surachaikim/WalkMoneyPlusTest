@@ -203,7 +203,7 @@ getLoanbyId(){
           this.trackfee = P.TrackFee
         }
         if(P.CapitalBalance !=""){
-          this.capitalbalance = P.CapitalBalance
+          this.capitalbalance = P.Capital
         }
         
         if(P.RealInterest !=""){
@@ -224,8 +224,9 @@ getLoanbyId(){
           MinPayment:P.MinPayment,
           StatusPay:P.StatusPay,
           DateLastPay:P.DateLastPay,
-          TotalLoanAmount:P.TotalLoanAmount,
-          InterestBalance:P.InterestBalance,
+          NewBalance:P.NewBalance,
+          RealInterest:P.RealInterest,
+          TermCapital:P.TermCapital,
           id : this.countLoan ++
            })
 

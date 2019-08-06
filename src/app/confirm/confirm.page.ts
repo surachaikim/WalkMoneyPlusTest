@@ -15,7 +15,7 @@ username:string="";
 password:string="";
 RegisterAt:any;
   constructor(private device: Device,private router: Router,public api: RestApiService,private storage: Storage) {
-    this.Ref =this.device.uuid
+    this.Ref =this.device.serial
    }
 
   ngOnInit() {
