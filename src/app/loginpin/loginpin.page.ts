@@ -42,6 +42,7 @@ export class LoginpinPage implements OnInit {
        // this.platform.exitApp(); 
   
         // or if that doesn't work, try
+         
         navigator['app'].exitApp();
       } else {
         //this.generic.showAlert("Exit", "Do you want to exit the app?", this.onYesHandler, this.onNoHandler, "backPress");

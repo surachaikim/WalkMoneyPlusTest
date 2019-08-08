@@ -27,8 +27,10 @@
     "@ionic-native/device": "^5.9.0",
     "@ionic-native/file": "^5.10.0",
     "@ionic-native/file-path": "^5.10.0",
+    "@ionic-native/geolocation": "^5.0.0",
     "@ionic-native/http": "^5.8.0",
     "@ionic-native/keyboard": "^5.10.0",
+    "@ionic-native/native-geocoder": "^5.0.0",
     "@ionic-native/screenshot": "^5.9.0",
     "@ionic-native/social-sharing": "^5.9.0",
     "@ionic-native/splash-screen": "^5.0.0",
@@ -41,9 +43,12 @@
     "cordova-android": "^7.0.0",
     "cordova-browser": "6.0.0",
     "cordova-ios": "5.0.1",
+    "cordova-plugin-add-swift-support": "^2.0.2",
     "cordova-plugin-advanced-http": "^2.1.1",
     "cordova-plugin-file": "^6.0.1",
     "cordova-plugin-filepath": "^1.5.5",
+    "cordova-plugin-geolocation": "^4.0.2",
+    "cordova-plugin-nativegeocoder": "^3.2.2",
     "cordova-plugin-x-socialsharing": "^5.4.7",
     "cordova-plugin-x-toast": "^2.7.2",
     "cordova-sqlite-storage": "^3.2.1",
@@ -112,7 +117,13 @@
       },
       "cordova-plugin-x-toast": {},
       "cordova-plugin-file": {},
-      "cordova-plugin-filepath": {}
+      "cordova-plugin-filepath": {},
+      "cordova-plugin-geolocation": {
+        "GEOLOCATION_USAGE_DESCRIPTION": "To locate you"
+      },
+      "cordova-plugin-nativegeocoder": {
+        "LOCATION_WHEN_IN_USE_DESCRIPTION": "Use geocoder service"
+      }
     },
     "platforms": [
       "browser",

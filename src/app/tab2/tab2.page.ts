@@ -246,7 +246,10 @@ this.keyboard.hide();
 
   }
 
- 
+  map(id){
+    this.nav.navigateForward('map/'+id)
+   // this.router.navigate(['map']);
+  }
   /*ngAfterViewInit() {
     this.backButtonSubscription = this.platform.backButton.subscribe(() => {
       navigator['app'].exitApp();

@@ -23,13 +23,13 @@
    
 
             <ion-item class="textbox">
-              <ion-input text-center class="font1" name="confirm" type="text" placeholder="ยืนยันรหัส"  [(ngModel)]="referencecode" ngModel required></ion-input>
+              <ion-input text-center class="font1" name="confirm" type="number" [pattern]="'06([0-9]{8})'" placeholder="ยืนยันรหัส"  [(ngModel)]="referencecode" ngModel required></ion-input>
             </ion-item>
             <ion-item  class="textbox" >
               <ion-input text-center class="font1" name="๊username" type="text" placeholder="ชื่อผู้ใช้งาน"  [(ngModel)]="username" ngModel required></ion-input>
             </ion-item>
             <ion-item class="textbox">
-              <ion-input  text-center class="font1"  name="password" type="email" placeholder="รหัสผู้ใช้งาน" [(ngModel)]="password" ngModel required></ion-input>
+              <ion-input  text-center class="font1"  name="password" type="password" placeholder="รหัสผู้ใช้งาน" [(ngModel)]="password" ngModel required></ion-input>
             </ion-item>
 
           </div>

@@ -184,6 +184,25 @@ export class RestApiService {
        catchError(this.handleError));
    }
 
+   getpersonInfo(CustomerCode: string,PersonId: string): Observable<any> {
+    // const url = `${apiUrl}/${code}/${pin}`;
+    const url =apiUrl + 'GetPersonInfo?ReceiveUser=' + this.ReceiveUser + '&ReceivePassWord='+ this.ReceivePassWord  +'&RegisterNo=' +   this.device.serial   +'&CustomerCode='+ CustomerCode+'&PersonId='+ PersonId
+  
+     return this.http.get(url).pipe(
+       map(this.extractData),
+       catchError(this.handleError));
+   }
+
+   UpdateLatitudeLongitude(CustomerCode: string,PersonId: string,Latitude:Number,Longitude:Number): Observable<any> {
+    // const url = `${apiUrl}/${code}/${pin}`;
+    const url =apiUrl + 'UpdateLatitudeLongitude?ReceiveUser=' + this.ReceiveUser + '&ReceivePassWord='+ this.ReceivePassWord  +'&RegisterNo=' +   this.device.serial   +'&CustomerCode='+ CustomerCode+'&PersonId='+ PersonId +'&Latitude='+Latitude+'&Longitude='+Longitude
+  
+     return this.http.get(url).pipe(
+       map(this.extractData),
+       catchError(this.handleError));
+   }
+
+
    InsertloanTrans(AccountNo: string,Amount:string,user:string,AccountName:string): Observable<any> {
     // const url = `${apiUrl}/${code}/${pin}`;
     const url =apiUrl + 'InsertLoanTrans?ReceiveUser=' + this.ReceiveUser + '&ReceivePassWord='+ this.ReceivePassWord  +'&RegisterNo=' +   this.device.serial    +'&AccountNo='+ AccountNo+ '&AccountName='+AccountName +'&Amount='+Amount+'&UserId='+user

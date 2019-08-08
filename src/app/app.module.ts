@@ -27,6 +27,8 @@ import { Keyboard } from '@ionic-native/keyboard/ngx';
 import { File } from '@ionic-native/file/ngx';
 import { DecimalPipe } from '@angular/common';
 import { FilePath } from '@ionic-native/file-path/ngx';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [
@@ -35,7 +37,7 @@ import { FilePath } from '@ionic-native/file-path/ngx';
   imports: [ 
      BrowserModule,
     PaydebtPageModule,
- 
+  
     ReceiptPageModule,
     ModalPageModule,
      IonicModule.forRoot(),
@@ -48,6 +50,8 @@ import { FilePath } from '@ionic-native/file-path/ngx';
     StatusBar,
     Screenshot,
     SplashScreen,
+    Geolocation,
+    NativeGeocoder,
     BarcodeScanner,
     SocialSharing,
     HTTP,

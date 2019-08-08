@@ -16,7 +16,7 @@ const routes: Routes = [
   { path: 'addpin', loadChildren: './addpin/addpin.module#AddpinPageModule' },
   { path: 'settingservice', loadChildren: './settingservice/settingservice.module#SettingservicePageModule' },
   { path: 'setting-service2', loadChildren: './setting-service2/setting-service2.module#SettingService2PageModule' },
-  { path: 'map', loadChildren: './map/map.module#MapPageModule' },
+  { path: 'map/:id', loadChildren: './map/map.module#MapPageModule' },
 
 ];
 @NgModule({
