@@ -17,7 +17,7 @@ export class Tab5Page implements OnInit {
 
   SumAmountList :any;
   SumAmount :any;
-  amount:string="00";
+  amount:string="0.00";
   VFName:string="";
   UserId:string="";
   DateToday: string = new Date().toLocaleDateString();
@@ -41,10 +41,10 @@ export class Tab5Page implements OnInit {
 
        this.api.getSumAllList(val)
        .subscribe(res => {   
-         this.SumAmountList = res;   
-       
-         
-         console.log(this.SumAmountList)
+         this.SumAmountList = res; 
+           
+
+   
         
        }, err => {
          console.log('JS Call error: ', err);
@@ -95,6 +95,7 @@ export class Tab5Page implements OnInit {
       this.DateToday = new Date().toLocaleDateString();
       this.Time = new Date().toLocaleTimeString();
       this.getSumAllList();
+      this.getSumAll();
       //complete()  signify that the refreshing has completed and to close the refresher
       event.target.complete();
     }, 2000);

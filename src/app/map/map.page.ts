@@ -16,7 +16,10 @@ export class MapPage implements OnInit {
   show:boolean=true
   map: any;
   address:string;
-  markerOptions: any = {position: null, map: null, title: null};
+  markerOptions: any = {position: null, 
+    map: null,
+     title: null,
+     animation: google.maps.Animation.DROP};
   marker: any;
   personid =null;
   Longitude:number;
@@ -87,10 +90,10 @@ export class MapPage implements OnInit {
       this.marker = new google.maps.Marker(this.markerOptions);
 
 
-    /* this.map.addListener('tilesloaded', () => {
+   this.map.addListener('tilesloaded', () => {
         console.log('accuracy',this.map);
         this.getAddressFromCoords(this.map.center.lat(), this.map.center.lng())
-      });*/
+      });
       this.show=false
  
     }).catch((error) => {
@@ -137,6 +140,7 @@ export class MapPage implements OnInit {
       let mapOptions = {
         center: latLng,
         zoom: 18,
+        
         mapTypeId: google.maps.MapTypeId.ROADMAP
       }
  

@@ -64,7 +64,7 @@ console.log(val)
   
 
       this.storage.set('CUSTOMERCODE',CustomerCode).then((val) =>{
-     //เก็บรหัสมาชิกลงเครื่อง
+    
 
      //เช็คว่าเคยลงทะเบียนไหม
      this.api.GetRegister(val)
@@ -109,8 +109,8 @@ console.log(val)
 AddRegister(){
 
 
-
-    this.api.AddRegister(this.CustomerCode,this.Fname,this.Lname,this.Email,this.Mobile)
+  this.storage.get('CUSTOMERCODE').then((val) =>{
+    this.api.AddRegister(val,this.Fname,this.Lname,this.Email,this.Mobile)
     .subscribe(res => {
      this.AddRegisterRes = res
 
@@ -126,7 +126,7 @@ AddRegister(){
   
     });
 
-   
+  });  
 }
 
 

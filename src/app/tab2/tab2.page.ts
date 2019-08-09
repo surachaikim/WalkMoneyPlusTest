@@ -250,6 +250,9 @@ this.keyboard.hide();
     this.nav.navigateForward('map/'+id)
    // this.router.navigate(['map']);
   }
+  opmap(){
+    
+  }
   /*ngAfterViewInit() {
     this.backButtonSubscription = this.platform.backButton.subscribe(() => {
       navigator['app'].exitApp();
